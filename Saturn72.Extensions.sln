@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions.UnitTesting", "Saturn72.Extensions.UnitTesting\Saturn72.Extensions.UnitTesting.csproj", "{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions.AspNet", "Saturn72.Extensions.AspNet\Saturn72.Extensions.AspNet.csproj", "{C0DDC567-BD56-4DD1-9503-747945420734}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions.AspNet.Tests", "Saturn72.Extensions.AspNet.Tests\Saturn72.Extensions.AspNet.Tests.csproj", "{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,22 @@ Global
 		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Release|x64.ActiveCfg = Release|x64
 		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Release|x64.Build.0 = Release|x64
+		{C0DDC567-BD56-4DD1-9503-747945420734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0DDC567-BD56-4DD1-9503-747945420734}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0DDC567-BD56-4DD1-9503-747945420734}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C0DDC567-BD56-4DD1-9503-747945420734}.Debug|x64.Build.0 = Debug|Any CPU
+		{C0DDC567-BD56-4DD1-9503-747945420734}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0DDC567-BD56-4DD1-9503-747945420734}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0DDC567-BD56-4DD1-9503-747945420734}.Release|x64.ActiveCfg = Release|Any CPU
+		{C0DDC567-BD56-4DD1-9503-747945420734}.Release|x64.Build.0 = Release|Any CPU
+		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Debug|x64.Build.0 = Debug|Any CPU
+		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Release|x64.ActiveCfg = Release|Any CPU
+		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
