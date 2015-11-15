@@ -12,7 +12,7 @@ namespace Saturn72.Extensions.Tests.Common
         {
             var converter = CommonHelper.GetCustomTypeConverter(typeof (decimal));
             converter.ShouldBe<DecimalConverter>();
-            converter.ConvertFrom("4.20").ShouldEqual(4.2);
+            converter.ConvertFrom("4.20").ShouldEqual((decimal)4.2);
         }
 
         [Fact]

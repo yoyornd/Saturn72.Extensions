@@ -13,9 +13,9 @@ namespace Saturn72.Extensions.Tests
         }
 
         [Fact]
-        public void AsFormat_null()
+        public void AsFormat_MissingArgThrowsFormatException()
         {
-            typeof (ArgumentNullException).ShouldBeThrownBy(() => "test{0} {1}".AsFormat( "1"));
+            typeof (FormatException).ShouldBeThrownBy(() => "test{0} {1}".AsFormat(1));
         }
 
         [Fact]

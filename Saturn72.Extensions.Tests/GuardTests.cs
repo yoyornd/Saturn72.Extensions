@@ -32,13 +32,19 @@ namespace Saturn72.Extensions.Tests
         }
 
         [Fact]
-        public void HasValue_TriggersAction()
+        public void HasValue_DoesNotTriggersAction()
         {
             var x = 0;
             Guard.HasValue("test", () => x++);
+            0.ShouldEqual(x);
+        }
+        [Fact]
+        public void HasValue_TriggersAction()
+        {
+            var x = 0;
+            Guard.HasValue("", () => x++);
             1.ShouldEqual(x);
         }
-
         [Fact]
         public void HasValue_ThrowsExceptionOnEmptyString()
         {

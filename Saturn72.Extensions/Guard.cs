@@ -83,8 +83,7 @@ namespace Saturn72.Extensions
 
         public static void NotEmpty<T>(IEnumerable<T> source, string message)
         {
-            NotEmpty(source,
-                    () => { throw new InvalidOperationException(message); });
+            NotEmpty(source, () => { throw new ArgumentException(message); });
         }
     }
 }

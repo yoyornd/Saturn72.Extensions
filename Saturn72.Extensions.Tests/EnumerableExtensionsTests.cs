@@ -11,7 +11,7 @@ namespace Saturn72.Extensions.Tests
         public void ForEachItem_ThrowsException()
         {
             var i = 0;
-            Assert.Throws<ArgumentException>(() => ((List<object>) null).ForEachItem(c => i++));
+            Assert.Throws<NullReferenceException>(() => ((List<object>) null).ForEachItem(c => i++));
         }
 
         [Fact]
@@ -46,16 +46,13 @@ namespace Saturn72.Extensions.Tests
         [Fact]
         public void maxby_throws_exception_if_empty()
         {
-            var source = new List<TestClass>();
-            var ex = Assert.Throws<ArgumentException>(() => source.MaxOrDefault(tc => tc.Index));
-            ex.Message.ShouldEqual("source object is empty");
+            typeof(ArgumentException).ShouldBeThrownBy(() => new List<TestClass>().MaxOrDefault(tc => tc.Index));
         }
 
         [Fact]
         public void maxby_throws_exception_if_null()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => ((TestClass[]) null).MaxOrDefault(tc => tc.Index));
-            ex.Message.ShouldEqual("Value cannot be null.\r\nParameter name: source");
+           typeof(ArgumentException).ShouldBeThrownBy(() => ((TestClass[]) null).MaxOrDefault(tc => tc.Index));
         }
 
         [Fact]
@@ -76,17 +73,13 @@ namespace Saturn72.Extensions.Tests
         [Fact]
         public void minby_throws_exception_if_empty()
         {
-            var source = new List<TestClass>();
-            var ex = Assert.Throws<ArgumentException>(() => source.MinBy(tc => tc.Index));
-            ex.Message.ShouldEqual("source object is empty");
+            typeof(ArgumentException).ShouldBeThrownBy(() => new List<TestClass>().MinBy(tc => tc.Index));
         }
 
         [Fact]
         public void minby_throws_exception_if_null()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => ((TestClass[]) null).MinBy(tc => tc.Index));
-
-            ex.Message.ShouldEqual("Value cannot be null.\r\nParameter name: source");
+            typeof(ArgumentException).ShouldBeThrownBy(() => ((TestClass[]) null).MinBy(tc => tc.Index));
         }
 
         [Fact]

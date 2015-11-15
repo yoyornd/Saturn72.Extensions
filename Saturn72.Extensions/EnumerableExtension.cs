@@ -45,7 +45,8 @@ namespace Saturn72.Extensions
         /// <param name="selector">selector to poerform on enumerable item</param>
         public static T MaxOrDefault<T, TKey>(this IEnumerable<T> source, Func<T, TKey> selector)
         {
-            return source.IsEmpty() ? default(T) : SortByOrder(source, selector, false).FirstOrDefault();
+            Guard.NotEmpty(source);
+            return SortByOrder(source, selector, false).FirstOrDefault();
         }
 
         /// <summary>
@@ -104,6 +105,7 @@ namespace Saturn72.Extensions
         /// <param name="keySelector">selector to porform on enumerable item</param>
         public static T MinBy<T, TKey>(this IEnumerable<T> source, Func<T, TKey> keySelector)
         {
+            Guard.NotEmpty(source);
             return SortByOrder(source, keySelector, true).FirstOrDefault();
         }
 
