@@ -8,6 +8,18 @@ namespace Saturn72.Extensions.Tests
     public class EnumerableExtensionsTests
     {
         [Fact]
+        public void NotEmpty_ReturnsTrue()
+        {
+            new[] {1,2,3}.NotEmpty().ShouldBeTrue();
+        }
+
+        [Fact]
+        public void NotEmpty_ReturnsFalse()
+        {
+            new int[] {}.NotEmpty().ShouldBeFalse();
+        }
+
+        [Fact]
         public void ForEachItem_ThrowsException()
         {
             var i = 0;
