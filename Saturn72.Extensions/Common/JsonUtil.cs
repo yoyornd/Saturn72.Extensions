@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Saturn72.Extensions.Utils
+namespace Saturn72.Extensions
 {
     public partial class JsonUtil
     {
