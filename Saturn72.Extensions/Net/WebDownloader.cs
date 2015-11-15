@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using Saturn72.Extensions.Common;
 
 namespace Saturn72.Extensions.Net
 {
