@@ -13,14 +13,14 @@ namespace Saturn72.Extensions
                 File.Delete(filePath);
         }
 
-        public static string MapRelativePath(string subFolder)
+        public static string RelativePathToAbsolutePath(string subFolder)
         {
             return HttpContext.Current.IsNull()
-                ? MapSimplePath(subFolder)
-                : MapWebPath(subFolder);
+                ? WebRelativePathToAbsolutePath(subFolder)
+                : FilSystemRelativePathToAbsolutePath(subFolder);
         }
 
-        private static string MapWebPath(string subFolder)
+        private static string FilSystemRelativePathToAbsolutePath(string subFolder)
         {
             var rPath = subFolder.Replace("\\", "/");
 
@@ -31,7 +31,7 @@ namespace Saturn72.Extensions
             return HttpContext.Current.Server.MapPath(rPath);
         }
 
-        private static string MapSimplePath(string subFolder)
+        private static string WebRelativePathToAbsolutePath(string subFolder)
         {
             var rPath = subFolder.Replace("/", "\\").RemoveAll("~");
             while (rPath.StartsWith("\\"))
