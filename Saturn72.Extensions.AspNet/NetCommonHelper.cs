@@ -7,6 +7,11 @@ namespace Saturn72.Extensions
 {
     public class NetCommonHelper
     {
+        public bool IsTrustLevel(AspNetHostingPermissionLevel permissionLevel)
+        {
+            return GetTrustLevel() == permissionLevel;
+        }
+
         /// <summary>
         ///     Finds the trust level of the running application
         ///     (http://blogs.msdn.com/dmitryr/archive/2007/01/23/finding-out-the-current-trust-level-in-asp-net.aspx)
