@@ -36,7 +36,7 @@ namespace Saturn72.Extensions
             var rPath = subFolder.Replace("/", "\\").RemoveAll("~");
             while (rPath.StartsWith("\\"))
                 rPath = rPath.Replace(0, 1, "");
-            return Path.Combine(Directory.GetCurrentDirectory(), rPath);
+            return Path.Combine(HttpRuntime.AppDomainAppPath, rPath);
         }
 
         public static void DeleteDirectory(string directoryToDelete)
@@ -78,7 +78,7 @@ namespace Saturn72.Extensions
                     }
                     File.Move(source, destination);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     File.Move(temp, destination);
                     }
