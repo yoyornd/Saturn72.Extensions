@@ -6,6 +6,8 @@ namespace Saturn72.Extensions
 {
     public static class Guard
     {
+        private const string MustFollowDefaultMessage = "The object does not follows the given rule.\nSee call stack for details";
+
         public static void NotNull(object[] objects)
         {
             foreach (var obj in objects)
@@ -29,7 +31,7 @@ namespace Saturn72.Extensions
 
         public static void MustFollow(Func<bool> perdicate)
         {
-            MustFollow(perdicate, "The object does not follows the given rule.\nSee call stack for details");
+            MustFollow(perdicate, MustFollowDefaultMessage);
         }
 
         //TODO: replace generic exception with dedicated one which get call stack data
@@ -43,9 +45,15 @@ namespace Saturn72.Extensions
             MustFollow(perdicate(), ifNotFollowsAction);
         }
 
-        public static void MustFollow(bool perdicate, Action ifNotFollowsAction)
+
+        public static void MustFollow(bool condition)
         {
-            if (!perdicate)
+            MustFollow(condition, MustFollowDefaultMessage);
+        }
+        
+        public static void MustFollow(bool condition, Action ifNotFollowsAction)
+        {
+            if (!condition)
                 ifNotFollowsAction();
         }
 
@@ -56,8 +64,13 @@ namespace Saturn72.Extensions
 
         public static void HasValue(string source)
         {
+            MustFollow(source.HasValue,"String value required");
+        }
+
+        public static void HasValue(string source, string message)
+        {
             MustFollow(source.HasValue,
-                () => { throw new ArgumentException("String has no value while required", "source"); });
+                () => { throw new ArgumentException(message, "source"); });
         }
 
         public static void HasValue(string source, Action action)

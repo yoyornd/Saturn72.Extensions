@@ -69,5 +69,12 @@ namespace Saturn72.Cron
 
             CronExpression = CronExpressionFormat.AsFormat(list[0], list[1], list[2], list[3], list[4]);
         }
-    }
+
+        public static bool IsValidCronExpression(string cronExpression)
+        {
+            return true;
+            //TODO implement this here
+        }
+
+}
 }
