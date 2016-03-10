@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Saturn72.Extensions
@@ -97,6 +98,22 @@ namespace Saturn72.Extensions
         public static void NotEmpty<T>(IEnumerable<T> source, string message)
         {
             NotEmpty(source, () => { throw new ArgumentException(message); });
+        }
+
+        public static void FileExists(string fileName)
+        {
+            MustFollow(() => File.Exists(fileName), fileName);
+        }
+
+        public static void FileExists(string fileName, string message)
+        {
+            MustFollow(() => File.Exists(fileName), () => { throw new FileNotFoundException(message); });
+
+        }
+
+        public static void FileExists(string fileName, Action notFoundAction)
+        {
+            MustFollow(() => File.Exists(fileName), notFoundAction);
         }
     }
 }
