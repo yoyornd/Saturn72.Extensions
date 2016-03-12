@@ -16,11 +16,11 @@ namespace Saturn72.Extensions
         public static string RelativePathToAbsolutePath(string subFolder)
         {
             return HttpContext.Current.IsNull()
-                ? WebRelativePathToAbsolutePath(subFolder)
-                : FilSystemRelativePathToAbsolutePath(subFolder);
+                ? FileSystemRelativePathToAbsolutePath(subFolder)
+                : WebRelativePathToAbsolutePath(subFolder);
         }
 
-        private static string FilSystemRelativePathToAbsolutePath(string subFolder)
+        private static string WebRelativePathToAbsolutePath(string subFolder)
         {
             var rPath = subFolder.Replace("\\", "/");
 
@@ -31,12 +31,13 @@ namespace Saturn72.Extensions
             return HttpContext.Current.Server.MapPath(rPath);
         }
 
-        private static string WebRelativePathToAbsolutePath(string subFolder)
+        private static string FileSystemRelativePathToAbsolutePath(string subFolder)
         {
             var rPath = subFolder.Replace("/", "\\").RemoveAll("~");
             while (rPath.StartsWith("\\"))
                 rPath = rPath.Replace(0, 1, "");
-            return Path.Combine(HttpRuntime.AppDomainAppPath, rPath);
+
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, rPath);
         }
 
         public static void DeleteDirectory(string directoryToDelete)
