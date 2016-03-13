@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Saturn72.Extensions
+namespace Saturn72.Extensions.Common
 {
     public static class UriUtil
     {
