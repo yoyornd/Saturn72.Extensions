@@ -1,8 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace Saturn72.Extensions
 {
+    [Obsolete("This object is obsolete, please use IOUtil class instead.")]
     public static class IoHelper
     {
         public static void FileMustExists(string fileName)
