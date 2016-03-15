@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using Saturn72.Extensions.Common;
 using Xunit;
 
 namespace Saturn72.Extensions.Tests.Utils

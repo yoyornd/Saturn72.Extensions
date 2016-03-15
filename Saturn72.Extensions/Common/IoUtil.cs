@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Saturn72.Extensions
+namespace Saturn72.Extensions.Common
 {
     public static class IoUtil
     {

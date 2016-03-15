@@ -1,7 +1,7 @@
 ﻿
 using System.Text.RegularExpressions;
 
-namespace Saturn72.Extensions
+namespace Saturn72.Extensions.Common
 {
     public class HtmlUtil
     {
