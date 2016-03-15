@@ -81,9 +81,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Saturn72.Extensions.UnitTesting\Saturn72.Extensions.UnitTesting.csproj">
+    <ProjectReference Include="..\Saturn72.Extensions.TestSdk\Saturn72.Extensions.TestSdk.csproj">
       <Project>{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}</Project>
-      <Name>Saturn72.Extensions.UnitTesting</Name>
+      <Name>Saturn72.Extensions.TestSdk</Name>
     </ProjectReference>
     <ProjectReference Include="..\Saturn72.Extensions\Saturn72.Extensions.csproj">
       <Project>{773F4467-A469-4196-A9B3-76A6C889C3ED}</Project>
