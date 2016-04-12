@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Saturn72.Extensions
 {
-    public partial class JsonUtil
+    public static partial class JsonUtil
     {
         public static T ParseJsonFromFile<T>(string filePath) where T : class, new()
         {
@@ -16,5 +16,7 @@ namespace Saturn72.Extensions
         {
             return JsonConvert.DeserializeObject<T>(JObject.Parse(jsonContent).ToString());
         }
+
+      
     }
 }
