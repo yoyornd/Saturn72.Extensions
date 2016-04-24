@@ -25,6 +25,14 @@ namespace Saturn72.Extensions.Tests
             var i = 0;
             Assert.Throws<NullReferenceException>(() => ((List<object>) null).ForEachItem(c => i++));
         }
+        
+        [Fact]
+        public void ForEachItem_IteratesOnCollection()
+        {
+            var i = 0;
+            new[] {1, 2, 3}.ForEachItem(c => i++);
+            Assert.AreEqual(3, i);
+        }
 
         [Fact]
         public void IsEmpty_ReturnsFalse()
