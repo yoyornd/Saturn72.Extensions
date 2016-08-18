@@ -43,16 +43,21 @@
 	echo run unit tests from %testBin%
 	echo Gather all Test Assemblies
 
+	set curDir=%cd%
 	cd %srcDir%
 	FOR /D /r %%G in (%testPrjRegEx%) DO (
 		Echo Scanning %%G
 		cd %%G
 		For /R %%F in (%testPrjBinRegEx%) do (
-			set testDlls=%testDlls% %%F
+			echo found %%F
+			Echo.%%F | findstr /i /v /C:"\\obj\\">nul && (set testDlls=%testDlls% %%F)			
 		)		
 	)
+	
 	echo VSTests assemblies list: %testDlls%		
-		
+	REM back to working dir
+	cd %curDir%
+	
 	%VsTestConsole% %testDlls%
 	if not "%errorlevel%"=="0" goto failure
 
