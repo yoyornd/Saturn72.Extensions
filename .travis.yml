@@ -1,4 +1,0 @@
-language: csharp
-solution: Saturn72.Extensions.sln
-install:
-  - nuget restore Saturn72.Extensions.sln
