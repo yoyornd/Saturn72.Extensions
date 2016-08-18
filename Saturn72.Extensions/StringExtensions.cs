@@ -33,20 +33,20 @@ namespace Saturn72.Extensions
             return string.Format(source, args);
         }
 
-        public static string AsFormat(this string source, IEnumerable<KeyValuePair<string, string>> args)
+        public static string AsFormat(this string source, IEnumerable<KeyValuePair<string, object>> args)
         {
             return source.AsFormat(args.ToArray());
         }
 
-        public static string AsFormat(this string source, IDictionary<string, string> args)
+        public static string AsFormat(this string source, IDictionary<string, object> args)
         {
             return source.AsFormat(args.ToArray());
         }
 
-        public static string AsFormat(this string source, params KeyValuePair<string, string>[] args)
+        public static string AsFormat(this string source, params KeyValuePair<string, object>[] args)
         {
             return args.Aggregate(source,
-                (current, keyValuePair) => current.Replace("{" + keyValuePair.Key + "}", keyValuePair.Value));
+                (current, keyValuePair) => current.Replace("{" + keyValuePair.Key + "}", keyValuePair.Value.ToString()));
         }
 
         public static bool HasValue(this string str)
@@ -203,10 +203,6 @@ namespace Saturn72.Extensions
                 default:
                     return false;
             }
-        }
-        public static string RemoveAllSubStringInstances(this string source, string subString)
-        {
-            return source.Replace(subString, string.Empty);
         }
     }
 }

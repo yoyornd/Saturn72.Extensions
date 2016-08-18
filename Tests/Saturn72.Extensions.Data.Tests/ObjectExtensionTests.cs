@@ -1,18 +1,19 @@
-﻿using Saturn72.Extensions;
-using Xunit;
+﻿using Saturn72.Extensions.TestSdk;
+using NUnit.Framework;
 
 namespace Saturn72.Extensions.Data.Tests
 {
+    [TestFixture]
     public class ObjectExtensionTests
     {
-        [Fact]
+        [Test]
         public void ToJson_ReturnsEmptyOnNull()
         {
             var result = ((object)null).ToJson();
-            Assert.Equal("null",result);
+            "null".ShouldEqual(result);
         }
 
-        [Fact]
+        [Test]
         public void ToJson_ReturnsString()
         {
             var tClass = new TestClass
@@ -29,8 +30,7 @@ namespace Saturn72.Extensions.Data.Tests
             var actual = tClass.ToJson();
             var expected = "{\"IntValue\":444,\"TestSubClasses\":[{\"IntValue\":0,\"StringArray\":[\"a\",\"b\",\"c\"]},{\"IntValue\":1,\"StringArray\":[\"d\",\"e\",\"f\"]},{\"IntValue\":2,\"StringArray\":[\"g\",\"h\",\"i\"]}]}";
 
-
-            Assert.Equal(expected, actual);
+            expected.ShouldEqual(actual);
         }
 
     }

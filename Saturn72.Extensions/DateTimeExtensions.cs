@@ -6,7 +6,7 @@ namespace Saturn72.Extensions
     {
         public static string ToTimeStamp(this DateTime dateTime)
         {
-            return dateTime.ToString("yyyyMMddHHmmssffff");
+            return dateTime.ToString("yyyyMMdd_HHmmssffff");
         }
 
         public static string NullableDateTimeToString(this DateTime? dateTime)
