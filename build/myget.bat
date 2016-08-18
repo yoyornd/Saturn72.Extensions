@@ -1,3 +1,6 @@
+	set prjName=Saturn72.Extensions
+	set slnName=Saturn72.Extensions
+	
 	set testPrjRegEx=*.Tests
 	set testPrjBinRegEx=*test*.dll
 	
@@ -13,11 +16,12 @@
 	   set version=-Version %PackageVersion%
 	)
 
+
 	set srcDir=%SourcesPath%\src
 	set pkgDir=%srcDir%\packages
 
-	set prjName=Saturn72.Extensions
-	set slnName=%SourcesPath%\**\*.sln
+	
+	set slnPath=%srcDir%\%slnName%.sln
 	set prjDir=%srcDir%\%prjCs
 	set prjCs=%prjDir%\%prjName%.csproj
 	set testBin=%srcDir%\Tests\%prjName%.Tests\bin\%config%\%prjName%.Tests.dll
@@ -28,9 +32,9 @@
 	call %NuGet% restore %srcDir% -OutputDirectory %pkgDir%
 
 	REM Build
-	echo Start building %slnName% using %MsBuildExe%
-	call "%MsBuildExe%" %slnName% /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
-
+	echo Start building %slnPath% using %MsBuildExe%
+	"%MsBuildExe%" %slnPath% /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
+	
 	REM Unit tests
 	set nugetBuildConfig=%SourcesPath%\Build\*.config
 	echo install build nuget dependencies from %nugetBuildConfig% to %pkgDir%
