@@ -22,8 +22,8 @@
 
 	
 	set slnPath=%srcDir%\%slnName%.sln
-	set prjDir=%srcDir%\%prjCs
 	set prjCs=%prjDir%\%prjName%.csproj
+	set prjDir=%srcDir%\%prjCs%
 	set testBin=%srcDir%\Tests\%prjName%.Tests\bin\%config%\%prjName%.Tests.dll
 
 	REM Restore nuget packages
