@@ -13,7 +13,7 @@ if not "%PackageVersion%" == "" (
 set srcDir=%SourcesPath%\src
 set pkgDir=%srcDir%\packages
 
-set prjName = Saturn72.UnitTesting.Framework
+set prjName=Saturn72.Extensions
 set slnName=%SourcesPath%\**\*.sln
 set prjDir=%srcDir%\%prjCs
 set prjCs=%prjDir%\%prjName%.csproj
@@ -34,10 +34,11 @@ call %Nuget% install %SourcesPath%\**\packages.config -OutputDirectory %pkgDir%
 
 echo run unit tests from %testBin%
 %VsTestConsole% /testcontainer:%testBin%
-
-set nunitExe=%pkgDir%\NUnit.ConsoleRunner.3.4.1\tools\nunit3-console.exe
-%nunitExe% /config:%config% %testBin%
 if not "%errorlevel%"=="0" goto failure
+
+REM set nunitExe=%pkgDir%\NUnit.ConsoleRunner.3.4.1\tools\nunit3-console.exe
+REM %nunitExe% /config:%config% %testBin%
+REM if not "%errorlevel%"=="0" goto failure
 
 REM Package
 mkdir Build
