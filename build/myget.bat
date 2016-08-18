@@ -43,17 +43,22 @@
 	echo run unit tests from %testBin%
 	echo Gather all Test Assemblies
 
-	set curDir=%cd%
-	cd %srcDir%
+	SETLOCAL ENABLEDELAYEDEXPANSION
+
 	FOR /D /r %%G in (%testPrjRegEx%) DO (
 		Echo Scanning %%G
 		cd %%G
 		For /R %%F in (%testPrjBinRegEx%) do (
 			echo found %%F
-			Echo.%%F | findstr /i /v /C:"obj">nul && (set testDlls=%testDlls% %%F)			
+			Echo.%%F|findstr /r /i /v /C:"obj" >nul && (
+				echo Add %%F to test assemblies collection
+				set testDlls=!testDlls! %%F
+				) || (
+				echo Skip %%F
+			)
 		)		
 	)
-	
+		
 	echo VSTests assemblies list: %testDlls%		
 	REM back to working dir
 	cd %curDir%
