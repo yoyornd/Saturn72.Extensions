@@ -79,7 +79,6 @@
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="DynamicHelper.cs" />
-    <Compile Include="Net\WebDownloader.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="UncAccessWithCredentials.cs" />
     <Compile Include="EnumerableExtension.cs" />
@@ -92,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Net\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

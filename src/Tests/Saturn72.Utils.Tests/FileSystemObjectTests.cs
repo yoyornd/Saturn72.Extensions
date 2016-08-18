@@ -42,26 +42,31 @@ namespace Saturn72.Utils.Tests
         }
 
         [Test]
-        public void FileExists_ReturnsFalseOnNotExistsPath()
+        public void FileExists_OnNotExistsPath()
         {
-            var fileName = @"C:\temp\NotExistsFile.txt";
+            var fileName = Path.GetTempFileName();
             DeleteFileIfExists(fileName);
-
-            Assert.False(FileSystemObject.FileExists(fileName));
+            FileSystemObject.FileExists(fileName).ShouldBeFalse();
+            //throws
+            typeof(FileNotFoundException).ShouldBeThrownBy(() => FileSystemObject.FileExists(fileName, true));
         }
 
         [Test]
-        public void FileExists_ThrowsExceptionOnEmptyPath()
+        public void FileExists_Throws_OnEmptyPath()
         {
-            var fileName = @"C:\temp\NotExistsFile.txt";
-            DeleteFileIfExists(fileName);
-            Assert.Throws<ArgumentException>(() => FileSystemObject.FileExists(fileName));
+            var fileName = "";
+            FileSystemObject.FileExists(fileName).ShouldBeFalse();
+            //throws
+            typeof(FileNotFoundException).ShouldBeThrownBy(() => FileSystemObject.FileExists(fileName, true));
         }
 
         [Test]
-        public void FileExists_ThrowsExceptionOnBadPath()
+        public void FileExists_OnBadPath()
         {
-            throw new NotImplementedException();
+            var fileName = "dddddd//dsdfsdfsdfsdfsdf";
+            FileSystemObject.FileExists(fileName).ShouldBeFalse();
+            //throws
+            typeof(FileNotFoundException).ShouldBeThrownBy(() => FileSystemObject.FileExists(fileName, true));
         }
 
         [Test]

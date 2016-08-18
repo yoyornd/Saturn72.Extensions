@@ -10,7 +10,7 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void ToTimeStamp_ReturnslegalTimestamp()
         {
-            DateTime.MinValue.ToTimeStamp().ShouldEqual("000101010000000000");
+            DateTime.MinValue.ToTimeStamp().ShouldEqual("00010101_0000000000");
         }
     }
 }

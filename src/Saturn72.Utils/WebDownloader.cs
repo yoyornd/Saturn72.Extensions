@@ -3,10 +3,11 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Web;
 
 #endregion
 
-namespace Saturn72.Extensions.Net
+namespace Saturn72.Utils
 {
     public class WebDownloader
     {
@@ -42,11 +43,11 @@ namespace Saturn72.Extensions.Net
             var request = (HttpWebRequest) WebRequest.Create(imageUri);
             using (var response = (HttpWebResponse) request.GetResponse())
             {
-                Guard.MustFollow((response.StatusCode == HttpStatusCode.OK ||
+                if(!(response.StatusCode == HttpStatusCode.OK ||
                                   response.StatusCode == HttpStatusCode.Moved ||
                                   response.StatusCode == HttpStatusCode.Redirect) &&
-                                 response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase)
-                    , "The given url does not contain downloadable image: " + imageUri);
+                                 response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase))
+                    throw new HttpRequestValidationException("The given url does not contain downloadable image: " + imageUri);
 
                 byte[] result;
                 var temp = Path.GetTempFileName();
