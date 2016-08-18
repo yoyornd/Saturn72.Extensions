@@ -48,7 +48,7 @@
 		Echo Scanning %%G
 		cd %%G
 		For /R %%F in (%testPrjBinRegEx%) do (
-			set testDlls=%testDlls% /testcontainer:%%F
+			set testDlls=%testDlls% %%F
 		)		
 	)
 	echo VSTests assemblies list: %testDlls%		
