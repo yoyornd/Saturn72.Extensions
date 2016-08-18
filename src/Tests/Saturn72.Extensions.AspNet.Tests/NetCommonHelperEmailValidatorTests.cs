@@ -1,9 +1,7 @@
-﻿using Saturn72.Extensions.TestSdk;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Saturn72.Extensions.AspNet.Tests
 {
-    [TestFixture]
     public class NetCommonHelperEmailValidatorTests
     {
         [Test]

@@ -1,7 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using System.Net;
-using Saturn72.Extensions.Common;
+
+#endregion
 
 namespace Saturn72.Extensions.Net
 {
@@ -14,7 +17,7 @@ namespace Saturn72.Extensions.Net
 
         public static void DownloadFile(string source, string destination, bool downloadAsync = false)
         {
-            IoUtil.CreateDirectoryIfNotExists(Path.GetDirectoryName(destination));
+            CreateDirectoryIfNotExists(Path.GetDirectoryName(destination));
             var sourceUri = new Uri(source);
 
             var action = downloadAsync
@@ -26,6 +29,14 @@ namespace Saturn72.Extensions.Net
                 action(webClient);
             }
         }
+
+        private static void CreateDirectoryIfNotExists(string dir)
+        {
+            if (Directory.Exists(dir))
+                return;
+            Directory.CreateDirectory(dir);
+        }
+
         public static byte[] GetImageBytes(Uri imageUri)
         {
             var request = (HttpWebRequest) WebRequest.Create(imageUri);
