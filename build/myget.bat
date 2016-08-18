@@ -24,7 +24,7 @@
 
 	REM Restore nuget packages
 	set pkgDir=%srcDir%\packages
-	echo restore nuget packages to %pkgDir% directory
+	echo restore nuget packages from %slnName% to %pkgDir% directory
 	call %NuGet% restore %slnName% -OutputDirectory %pkgDir% -NonInteractive
 
 	REM Build
