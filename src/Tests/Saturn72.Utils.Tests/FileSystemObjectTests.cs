@@ -25,9 +25,9 @@ namespace Saturn72.Utils.Tests
         public void FileExists_ReturnTrueOnExistsFile()
         {
             var fileName = Path.GetTempFileName();
-            Assert.True(FileSystemObject.FileExists(fileName));
-
+            var res = FileSystemObject.FileExists(fileName);
             File.Delete(fileName);
+            res.ShouldBeTrue();
         }
 
 

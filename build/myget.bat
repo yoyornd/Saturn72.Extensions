@@ -23,13 +23,13 @@
 	set testBin=%srcDir%\Tests\%prjName%.Tests\bin\%config%\%prjName%.Tests.dll
 
 	REM Restore nuget packages
-	set pkgDir=%cd%\%srcDir%\packages
+	set pkgDir=%srcDir%\packages
 	echo restore nuget packages to %pkgDir% directory
 	call %NuGet% restore %slnName% -OutputDirectory %pkgDir% -NonInteractive
 
 	REM Build
 	echo Start building %slnName% using %MsBuildExe%
-	%MsBuildExe% %slnName% /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
+	call "%MsBuildExe%" %slnName% /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
 
 	REM Unit tests
 	echo install build nuget dependencies to %pkgDir%
