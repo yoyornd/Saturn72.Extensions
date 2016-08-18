@@ -32,18 +32,16 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonHelper.cs" />
     <Compile Include="FileSystemObject.cs" />
+    <Compile Include="GenericListTypeConverter.cs" />
+    <Compile Include="HtmlUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Saturn72.Extensions\Saturn72.Extensions.csproj">
-      <Project>{773f4467-a469-4196-a9b3-76a6c889c3ed}</Project>
-      <Name>Saturn72.Extensions</Name>
-    </ProjectReference>
+    <Compile Include="ReflectionUtil.cs" />
+    <Compile Include="UriUtil.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,8 +1,7 @@
-﻿using Saturn72.Extensions.Common;
-using Saturn72.Extensions.TestSdk;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Saturn72.UnitTesting.Framework;
 
-namespace Saturn72.Extensions.Tests.Utils
+namespace Saturn72.Utils.Tests
 {
     public class HtmlUtilTests
     {

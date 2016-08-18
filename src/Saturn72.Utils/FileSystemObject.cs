@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Web;
-using Saturn72.Extensions;
 
 namespace Saturn72.Utils
 {
@@ -10,13 +9,13 @@ namespace Saturn72.Utils
     {
         public static void DeleteFile(string filePath)
         {
-            if (filePath.HasValue() && File.Exists(filePath))
+            if (!string.IsNullOrWhiteSpace(filePath) && !string.IsNullOrEmpty(filePath) && File.Exists(filePath))
                 File.Delete(filePath);
         }
 
         public static string RelativePathToAbsolutePath(string subFolder)
         {
-            return HttpContext.Current.IsNull()
+            return HttpContext.Current == null
                 ? FileSystemRelativePathToAbsolutePath(subFolder)
                 : WebRelativePathToAbsolutePath(subFolder);
         }
@@ -26,7 +25,7 @@ namespace Saturn72.Utils
             var rPath = subFolder.Replace("\\", "/");
 
             while (rPath.StartsWith("/") || rPath.StartsWith("~"))
-                rPath = rPath.Replace(0, 1, "");
+                rPath = ReplaceIndexed(rPath, 0, 1, "");
             rPath = "~/" + rPath;
 
             return HttpContext.Current.Server.MapPath(rPath);
@@ -34,9 +33,9 @@ namespace Saturn72.Utils
 
         private static string FileSystemRelativePathToAbsolutePath(string subFolder)
         {
-            var rPath = subFolder.Replace("/", "\\").RemoveAll("~");
+            var rPath = subFolder.Replace("/", "\\").Replace("~", string.Empty);
             while (rPath.StartsWith("\\"))
-                rPath = rPath.Replace(0, 1, "");
+                rPath = ReplaceIndexed(rPath, 0, 1, "");
 
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, rPath);
         }
@@ -66,7 +65,9 @@ namespace Saturn72.Utils
 
         public static void MoveFileAsync(string source, string destination)
         {
-            IoHelper.FileMustExists(source);
+            if(!File.Exists(source))
+                throw new FileNotFoundException(source);
+
             var temp = Path.GetTempFileName();
 
             new Task(() =>
@@ -94,8 +95,22 @@ namespace Saturn72.Utils
 
         private static string GetFileNameFromUri(Uri uri)
         {
-            Guard.MustFollow(() => uri.IsFile, "Cannot get file name from uri since it is not file. uri: " + uri);
+            if(!uri.IsFile)
+                throw new UriFormatException("Cannot get file name from uri since it is not file. uri: " + uri);
+
             return Path.GetFileName(uri.AbsolutePath);
+        }
+
+        public static string ReplaceIndexed(string source, int fromIndex, int toIndex, string replacementString)
+        {
+            //verifying out-of-bound
+            if (fromIndex > toIndex || fromIndex < 0 || fromIndex >= source.Length)
+                return source;
+
+            if (toIndex > source.Length)
+                toIndex = source.Length;
+
+            return source.Substring(0, fromIndex) + replacementString + source.Substring(toIndex, source.Length - toIndex);
         }
     }
 }

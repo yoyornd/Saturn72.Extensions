@@ -1,16 +1,20 @@
-﻿using System;
+﻿#region
 
-namespace Saturn72.Extensions.Common
+using System;
+
+#endregion
+
+namespace Saturn72.Utils
 {
     public static class UriUtil
     {
         public static Uri Combine(string baseUri, string relativeUri)
         {
-            Guard.HasValue(baseUri, () => { throw new ArgumentException("baseUri"); });
+            if (string.IsNullOrEmpty(baseUri) || string.IsNullOrWhiteSpace(baseUri))
+                throw new ArgumentException("baseUri");
 
             var headUri = new Uri(baseUri);
-
-            if (!relativeUri.HasValue())
+            if (string.IsNullOrEmpty(relativeUri) || string.IsNullOrWhiteSpace(relativeUri))
                 return headUri;
 
             Uri result;

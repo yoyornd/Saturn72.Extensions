@@ -3,7 +3,7 @@
 using System;
 using System.IO;
 using NUnit.Framework;
-using Saturn72.Extensions.TestSdk;
+using Saturn72.UnitTesting.Framework;
 
 #endregion
 
@@ -62,6 +62,20 @@ namespace Saturn72.Utils.Tests
         public void FileExists_ThrowsExceptionOnBadPath()
         {
             throw new NotImplementedException();
+        }
+
+        [Test]
+        public void DeleteFile_Deletes()
+        {
+            var file = Path.GetTempFileName();
+
+            FileSystemObject.DeleteFile(file);
+            var res = File.Exists(file);
+
+            //we delete here in order to prevent file stay in file system on dailure
+            DeleteFileIfExists(file);
+
+            res.ShouldBeFalse();
         }
 
         #region Utilities

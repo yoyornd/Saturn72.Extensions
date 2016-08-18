@@ -1,7 +1,11 @@
-﻿using System;
-using Saturn72.Extensions.TestSdk;
-using NUnit.Framework;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+using NUnit.Framework;
+using Saturn72.UnitTesting.Framework;
+
+#endregion
 
 namespace Saturn72.Extensions.Tests
 {
@@ -16,7 +20,7 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void AsFormat_MissingArgThrowsFormatException()
         {
-            typeof (FormatException).ShouldBeThrownBy(() => "test{0} {1}".AsFormat(1));
+            typeof(FormatException).ShouldBeThrownBy(() => "test{0} {1}".AsFormat(1));
         }
 
         [Test]
@@ -35,7 +39,7 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void AsFormat_ThrowesException()
         {
-            typeof (FormatException).ShouldBeThrownBy(() => "{ Test }".AsFormat("123"));
+            typeof(FormatException).ShouldBeThrownBy(() => "{ Test }".AsFormat("123"));
         }
 
         [Test]

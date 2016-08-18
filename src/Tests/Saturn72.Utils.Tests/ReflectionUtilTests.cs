@@ -1,26 +1,25 @@
 ﻿using System.Collections.Generic;
-using Saturn72.Extensions.Common;
-using Saturn72.Extensions.TestSdk;
 using NUnit.Framework;
+using Saturn72.UnitTesting.Framework;
 
-namespace Saturn72.Extensions.Tests.Common
+namespace Saturn72.Utils.Tests
 {
-    public class ReflectionHelperTests
+    public class ReflectionUtilTests
     {
         [Test]
         public void SetPropertyValueUsingReflection_insertsObject()
         {
             var mc = new MyClass();
-            ReflectionHelper.SetPropertyValueUsingReflection(mc, "string", "test");
+            ReflectionUtil.SetPropertyValueUsingReflection(mc, "string", "test");
             mc.String.ShouldEqual("test");
 
             var v = new MyClass {String = "internal"};
-            ReflectionHelper.SetPropertyValueUsingReflection(mc, "object", v);
+            ReflectionUtil.SetPropertyValueUsingReflection(mc, "object", v);
             mc.Object.ShouldEqual(v);
 
 
             var list = new[] {1, 2, 3, 4};
-            ReflectionHelper.SetPropertyValueUsingReflection(mc, "intenum", list);
+            ReflectionUtil.SetPropertyValueUsingReflection(mc, "intenum", list);
             mc.IntEnum.ShouldEqual(list);
         }
 

@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
-using Saturn72.Extensions.TestSdk;
 using NUnit.Framework;
+using Saturn72.UnitTesting.Framework;
+
+#endregion
 
 namespace Saturn72.Extensions.Tests
 {
@@ -10,7 +14,7 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void NotEmpty_ReturnsTrue()
         {
-            new[] {1,2,3}.NotEmpty().ShouldBeTrue();
+            new[] {1, 2, 3}.NotEmpty().ShouldBeTrue();
         }
 
         [Test]
@@ -64,7 +68,7 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void maxby_throws_exception_if_null()
         {
-           typeof(ArgumentException).ShouldBeThrownBy(() => ((TestClass[]) null).MaxOrDefault(tc => tc.Index));
+            typeof(ArgumentException).ShouldBeThrownBy(() => ((TestClass[]) null).MaxOrDefault(tc => tc.Index));
         }
 
         [Test]
@@ -97,13 +101,13 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void IsEnumerableOfType_ReturnsTrue()
         {
-            typeof (List<string>).IsIEnumerableofType().ShouldBeTrue();
+            typeof(List<string>).IsIEnumerableofType().ShouldBeTrue();
         }
 
         [Test]
         public void IsEnumerableOfType_ReturnsFalse()
         {
-            typeof (string).IsIEnumerableofType().ShouldBeFalse();
+            typeof(string).IsIEnumerableofType().ShouldBeFalse();
         }
 
         [Test]

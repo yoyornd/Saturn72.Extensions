@@ -1,11 +1,14 @@
-﻿using System;
-using Saturn72.Extensions.Common;
-using NUnit.Framework;
-using Saturn72.Extensions.TestSdk;
+﻿#region
 
-namespace Saturn72.Extensions.Tests
+using System;
+using NUnit.Framework;
+using Saturn72.UnitTesting.Framework;
+
+#endregion
+
+namespace Saturn72.Utils.Tests
 {
-    public class UriHelperTests
+    public class UriUtilTests
     {
         [Test]
         public void Combine_ReturnsBaseUriOnEmptyrelativeUrl()

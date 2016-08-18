@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Saturn72.Extensions.Common
+namespace Saturn72.Utils
 {
     public static class CommonHelper
     {

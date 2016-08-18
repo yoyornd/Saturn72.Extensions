@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using NUnit.Framework;
-using Saturn72.Extensions.TestSdk;
+using Saturn72.UnitTesting.Framework;
+
+#endregion
 
 namespace Saturn72.Extensions.Tests
 {
-    public class ActionExtensionsTests:TestsBase
+    public class ActionExtensionsTests
     {
         [Test]
         public void Run_InvokesAction()
@@ -29,7 +33,7 @@ namespace Saturn72.Extensions.Tests
 
             i.ShouldEqual(6);
         }
-        
+
 
         [Test]
         public void RunAll()

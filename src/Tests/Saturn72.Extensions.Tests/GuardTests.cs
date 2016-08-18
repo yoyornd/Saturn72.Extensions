@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Saturn72.Extensions.TestSdk;
+
 using NUnit.Framework;
+using Saturn72.UnitTesting.Framework;
 
 namespace Saturn72.Extensions.Tests
 {
-    public class GuardTests:TestsBase
+    public class GuardTests
     {
         [Test]
         public void MustFollows_DoesNotTriggerAction()

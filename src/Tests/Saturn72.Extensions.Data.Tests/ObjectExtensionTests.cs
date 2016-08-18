@@ -1,5 +1,5 @@
-﻿using Saturn72.Extensions.TestSdk;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Saturn72.UnitTesting.Framework;
 
 namespace Saturn72.Extensions.Data.Tests
 {

@@ -1,9 +1,12 @@
-﻿
+﻿#region
+
 using System.Reflection;
 
-namespace Saturn72.Extensions.Common
+#endregion
+
+namespace Saturn72.Utils
 {
-    public static class ReflectionHelper
+    public static class ReflectionUtil
     {
         public static void SetPropertyValueUsingReflection(object obj, string name, object value)
         {
