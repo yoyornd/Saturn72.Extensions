@@ -36,7 +36,7 @@
 	"%MsBuildExe%" %slnPath% /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
 	
 	REM Unit tests
-	set nugetBuildConfig=%SourcesPath%\Build\*.config
+	set nugetBuildConfig=%SourcesPath%\Build\packages.config
 	echo install build nuget dependencies from %nugetBuildConfig% to %pkgDir%
 	call %Nuget% install %nugetBuildConfig% -OutputDirectory %pkgDir%
 
@@ -50,7 +50,7 @@
 		cd %%G
 		For /R %%F in (%testPrjBinRegEx%) do (
 			echo found %%F
-			Echo.%%F | findstr /i /v /C:"\\obj\\">nul && (set testDlls=%testDlls% %%F)			
+			Echo.%%F | findstr /i /v /C:"\obj\">nul && (set testDlls=%testDlls% %%F)			
 		)		
 	)
 	
