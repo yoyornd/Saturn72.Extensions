@@ -50,7 +50,7 @@
 		cd %%G
 		For /R %%F in (%testPrjBinRegEx%) do (
 			echo found %%F
-			Echo.%%F | findstr /i /v /C:"\obj\">nul && (set testDlls=%testDlls% %%F)			
+			Echo.%%F | findstr /i /v /R "*\obj\*">nul && (set testDlls=%testDlls% %%F)			
 		)		
 	)
 	
