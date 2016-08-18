@@ -24,8 +24,7 @@ namespace Saturn72.Utils.Tests
         [Test]
         public void FileExists_ReturnTrueOnExistsFile()
         {
-            var fileName = @"C:\temp\FileSystemObjectTests_file.txt";
-            PrepareEnvironment(fileName);
+            var fileName = Path.GetTempFileName();
             Assert.True(FileSystemObject.FileExists(fileName));
 
             File.Delete(fileName);
@@ -84,17 +83,6 @@ namespace Saturn72.Utils.Tests
         }
 
         #region Utilities
-
-        private void PrepareEnvironment(string path)
-        {
-            DeleteFileIfExists(path);
-
-            var stream = File.CreateText(path);
-            stream.Close();
-            if (!File.Exists(path))
-                throw new FileNotFoundException(
-                    "Setup failure: Failed to create file for FileExists_ReturnTrueOnExistsFile test. Path: " + path);
-        }
 
         private static void DeleteFileIfExists(string path)
         {
