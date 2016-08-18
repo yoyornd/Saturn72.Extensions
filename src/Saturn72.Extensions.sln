@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions", "Saturn72.Extensions\Saturn72.Extensions.csproj", "{773F4467-A469-4196-A9B3-76A6C889C3ED}"
 EndProject
@@ -20,8 +20,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Utils.Tests", "Tests\Saturn72.Utils.Tests\Saturn72.Utils.Tests.csproj", "{16EA0E78-4840-44EF-A9BD-3453763EEEE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions.AspNet.Tests", "Tests\Saturn72.Extensions.AspNet.Tests\Saturn72.Extensions.AspNet.Tests.csproj", "{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions.TestSdk", "Tests\Saturn72.Extensions.TestSdk\Saturn72.Extensions.TestSdk.csproj", "{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,14 +87,6 @@ Global
 		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Release|x64.ActiveCfg = Release|Any CPU
 		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Release|x64.Build.0 = Release|Any CPU
-		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Debug|x64.ActiveCfg = Debug|x64
-		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Debug|x64.Build.0 = Debug|x64
-		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Release|x64.ActiveCfg = Release|x64
-		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,6 +96,5 @@ Global
 		{2E16A9AA-F5CB-4B4B-B805-1FCF18645A2D} = {B80A4158-F1B9-4AC3-AAAD-910B3E1595BA}
 		{16EA0E78-4840-44EF-A9BD-3453763EEEE2} = {B80A4158-F1B9-4AC3-AAAD-910B3E1595BA}
 		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91} = {B80A4158-F1B9-4AC3-AAAD-910B3E1595BA}
-		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4} = {B80A4158-F1B9-4AC3-AAAD-910B3E1595BA}
 	EndGlobalSection
 EndGlobal

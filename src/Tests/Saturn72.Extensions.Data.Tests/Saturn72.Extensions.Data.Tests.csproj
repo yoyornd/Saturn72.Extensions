@@ -53,10 +53,6 @@
       <Project>{D2A1B50B-9F66-4574-81B3-C486FCEB9D03}</Project>
       <Name>Saturn72.Extensions.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Saturn72.Extensions.TestSdk\Saturn72.Extensions.TestSdk.csproj">
-      <Project>{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}</Project>
-      <Name>Saturn72.Extensions.TestSdk</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

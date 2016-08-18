@@ -50,10 +50,6 @@
       <Project>{AA7BFC22-C9CD-4C3C-A4D5-FDA1742EAF36}</Project>
       <Name>Saturn72.Utils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Saturn72.Extensions.TestSdk\Saturn72.Extensions.TestSdk.csproj">
-      <Project>{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}</Project>
-      <Name>Saturn72.Extensions.TestSdk</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
