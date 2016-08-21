@@ -99,6 +99,12 @@
 	call %NuGet% pack %tmpPrjCs% -symbols -o Build -p Configuration=%config% %version%
 	if not "%errorlevel%"=="0" goto failure	
 	
+	REM In case multiple packages required - explicit nuget package for each project
+	set tmpPrjName=Saturn72.Cron
+	set tmpPrjCs=%srcDir%\%tmpPrjName%\%tmpPrjName%.csproj
+	call %NuGet% pack %tmpPrjCs% -symbols -o Build -p Configuration=%config% %version%
+	if not "%errorlevel%"=="0" goto failure	
+	
 	goto success
 
 	:success
