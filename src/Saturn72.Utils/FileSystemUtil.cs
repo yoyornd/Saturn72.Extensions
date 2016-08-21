@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -11,6 +12,43 @@ namespace Saturn72.Extensions
 {
     public static class FileSystemUtil
     {
+        /// <summary>
+        ///     Deletes directory context
+        /// </summary>
+        /// <param name="path">path to directory</param>
+        public static void DeleteDirectoryContent(string path)
+        {
+            if (!Directory.Exists(path))
+                return;
+            foreach (var dir in Directory.GetDirectories(path))
+                Directory.Delete(dir, true);
+
+            DeleteAllDirectoryFiles(path);
+        }
+
+        /// <summary>
+        ///     Deletes all directory files
+        /// </summary>
+        /// <param name="path">path to directory</param>
+        /// <param name="ignoredFileExtensions">
+        ///     files extensions to be ignored, seperated comma delimited
+        ///     <example>FileSystemUtil.DeleteAllDirectoryFiles(@"C:\temp", "xml, json, txt")</example>
+        /// </param>
+        public static void DeleteAllDirectoryFiles(string path, string ignoredFileExtensions = null)
+        {
+            if (!Directory.Exists(path))
+                return;
+            var ignoredExtensions = IsNullEmptyOrWhiteSpaces(ignoredFileExtensions)
+                ? ignoredFileExtensions.Split(',').Where(x => IsNullEmptyOrWhiteSpaces(x)).Select(x => x.Trim())
+                : new string[] {};
+            var files =
+                Directory.GetFiles(path).Where(f => !ignoredExtensions.Contains(Path.GetExtension(f).Substring(1)));
+
+            foreach (var file in files)
+                File.Delete(file);
+        }
+
+
         public static void DeleteFile(string filePath)
         {
             if (!string.IsNullOrWhiteSpace(filePath) && !string.IsNullOrEmpty(filePath) && File.Exists(filePath))
@@ -116,6 +154,11 @@ namespace Saturn72.Extensions
 
             return source.Substring(0, fromIndex) + replacementString +
                    source.Substring(toIndex, source.Length - toIndex);
+        }
+
+        private static bool IsNullEmptyOrWhiteSpaces(string source)
+        {
+            return string.IsNullOrWhiteSpace(source) || string.IsNullOrEmpty(source);
         }
     }
 }

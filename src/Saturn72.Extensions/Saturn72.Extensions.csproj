@@ -80,6 +80,7 @@
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="DynamicHelper.cs" />
     <Compile Include="ExceptionExtensions.cs" />
+    <Compile Include="StreamExtensions.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="UncAccessWithCredentials.cs" />
     <Compile Include="EnumerableExtension.cs" />
