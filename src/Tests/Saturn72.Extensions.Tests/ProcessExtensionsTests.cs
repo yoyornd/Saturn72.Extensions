@@ -2,6 +2,8 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Threading;
 using NUnit.Framework;
 using Saturn72.UnitTesting.Framework;
@@ -30,7 +32,9 @@ namespace Saturn72.Extensions.Tests
         {
             new Process().IsRunning().ShouldBeFalse();
 
-            var proc = Process.Start("calc");
+            var curDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var file = Path.Combine(curDir, "resources\\RunsInLoop.exe");
+            var proc = Process.Start(file);
             Thread.Sleep(3000);
             proc.CloseMainWindow();
             Thread.Sleep(3000);

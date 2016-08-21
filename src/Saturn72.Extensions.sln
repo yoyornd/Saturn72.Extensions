@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions", "Saturn72.Extensions\Saturn72.Extensions.csproj", "{773F4467-A469-4196-A9B3-76A6C889C3ED}"
 EndProject
@@ -20,6 +20,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Utils.Tests", "Tests\Saturn72.Utils.Tests\Saturn72.Utils.Tests.csproj", "{16EA0E78-4840-44EF-A9BD-3453763EEEE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions.AspNet.Tests", "Tests\Saturn72.Extensions.AspNet.Tests\Saturn72.Extensions.AspNet.Tests.csproj", "{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{32954222-5FF1-4BE2-8675-4632BBCD62F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunsInLoop", "Resources\RunsInLoop\RunsInLoop.csproj", "{79E51DDB-8ABE-42EE-A9AA-0D6C449A4414}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +91,12 @@ Global
 		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Release|x64.ActiveCfg = Release|Any CPU
 		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91}.Release|x64.Build.0 = Release|Any CPU
+		{79E51DDB-8ABE-42EE-A9AA-0D6C449A4414}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79E51DDB-8ABE-42EE-A9AA-0D6C449A4414}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{79E51DDB-8ABE-42EE-A9AA-0D6C449A4414}.Debug|x64.Build.0 = Debug|Any CPU
+		{79E51DDB-8ABE-42EE-A9AA-0D6C449A4414}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79E51DDB-8ABE-42EE-A9AA-0D6C449A4414}.Release|x64.ActiveCfg = Release|Any CPU
+		{79E51DDB-8ABE-42EE-A9AA-0D6C449A4414}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,5 +106,6 @@ Global
 		{2E16A9AA-F5CB-4B4B-B805-1FCF18645A2D} = {B80A4158-F1B9-4AC3-AAAD-910B3E1595BA}
 		{16EA0E78-4840-44EF-A9BD-3453763EEEE2} = {B80A4158-F1B9-4AC3-AAAD-910B3E1595BA}
 		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91} = {B80A4158-F1B9-4AC3-AAAD-910B3E1595BA}
+		{79E51DDB-8ABE-42EE-A9AA-0D6C449A4414} = {32954222-5FF1-4BE2-8675-4632BBCD62F8}
 	EndGlobalSection
 EndGlobal
