@@ -29,4 +29,7 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 [Pp]ackages
 *.sou
-!**/*.Tests/**/Resources/
+
+
+#exclude patterns
+!**/*.Tests/Resources/
