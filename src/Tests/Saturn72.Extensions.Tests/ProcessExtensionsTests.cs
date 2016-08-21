@@ -30,7 +30,7 @@ namespace Saturn72.Extensions.Tests
         {
             new Process().IsRunning().ShouldBeFalse();
 
-            var proc = Process.Start("notepad");
+            var proc = Process.Start("calc");
             Thread.Sleep(3000);
             proc.CloseMainWindow();
             Thread.Sleep(3000);
