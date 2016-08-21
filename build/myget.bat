@@ -1,8 +1,8 @@
 	set prjName=Saturn72.Extensions
 	set slnName=Saturn72.Extensions
 	
-	set testPrjRegEx=*Tests
-	set testPrjBinRegEx=*tests.dll
+	set testPrjRegEx=*.Tests
+	set testPrjBinRegEx=*.tests.dll
 	
 	@echo Off
 
