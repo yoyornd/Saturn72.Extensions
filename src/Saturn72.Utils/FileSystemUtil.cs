@@ -1,9 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Saturn72.Utils
+#endregion
+
+namespace Saturn72.Extensions
 {
     public static class FileSystemObject
     {
@@ -65,7 +69,7 @@ namespace Saturn72.Utils
 
         public static void MoveFileAsync(string source, string destination)
         {
-            if(!File.Exists(source))
+            if (!File.Exists(source))
                 throw new FileNotFoundException(source);
 
             var temp = Path.GetTempFileName();
@@ -84,7 +88,7 @@ namespace Saturn72.Utils
                 catch (Exception)
                 {
                     File.Move(temp, destination);
-                    }
+                }
             }).Start();
         }
 
@@ -95,7 +99,7 @@ namespace Saturn72.Utils
 
         private static string GetFileNameFromUri(Uri uri)
         {
-            if(!uri.IsFile)
+            if (!uri.IsFile)
                 throw new UriFormatException("Cannot get file name from uri since it is not file. uri: " + uri);
 
             return Path.GetFileName(uri.AbsolutePath);
@@ -110,7 +114,8 @@ namespace Saturn72.Utils
             if (toIndex > source.Length)
                 toIndex = source.Length;
 
-            return source.Substring(0, fromIndex) + replacementString + source.Substring(toIndex, source.Length - toIndex);
+            return source.Substring(0, fromIndex) + replacementString +
+                   source.Substring(toIndex, source.Length - toIndex);
         }
     }
 }

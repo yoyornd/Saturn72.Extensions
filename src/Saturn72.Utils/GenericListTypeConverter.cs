@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 
-namespace Saturn72.Utils
+#endregion
+
+namespace Saturn72.Extensions
 {
     public class GenericListTypeConverter<T> : TypeConverter
     {
@@ -23,17 +27,16 @@ namespace Saturn72.Utils
             {
                 var result = input
                     .Split(',')
-                    .Select(x=>x.Trim())
+                    .Select(x => x.Trim())
                     .ToArray();
                 return result;
             }
-            
+
             return new string[0];
         }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-
             if (sourceType == typeof(string))
             {
                 string[] items = GetStringArray(sourceType.ToString());
@@ -47,14 +50,14 @@ namespace Saturn72.Utils
         {
             if (value is string)
             {
-                string[] items = GetStringArray((string)value);
+                string[] items = GetStringArray((string) value);
                 var result = new List<T>();
                 Array.ForEach(items, s =>
                 {
                     object item = typeConverter.ConvertFromInvariantString(s);
                     if (item != null)
                     {
-                        result.Add((T)item);
+                        result.Add((T) item);
                     }
                 });
 
@@ -63,7 +66,8 @@ namespace Saturn72.Utils
             return base.ConvertFrom(context, culture, value);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value,
+            Type destinationType)
         {
             if (destinationType == typeof(string))
             {
@@ -71,12 +75,12 @@ namespace Saturn72.Utils
                 if (value != null)
                 {
                     //we don't use string.Join() because it doesn't support invariant culture
-                    for (int i = 0; i < ((IList<T>)value).Count; i++)
+                    for (int i = 0; i < ((IList<T>) value).Count; i++)
                     {
-                        var str1 = Convert.ToString(((IList<T>)value)[i], CultureInfo.InvariantCulture);
+                        var str1 = Convert.ToString(((IList<T>) value)[i], CultureInfo.InvariantCulture);
                         result += str1;
                         //don't add comma after the last element
-                        if (i != ((IList<T>)value).Count - 1)
+                        if (i != ((IList<T>) value).Count - 1)
                             result += ",";
                     }
                 }

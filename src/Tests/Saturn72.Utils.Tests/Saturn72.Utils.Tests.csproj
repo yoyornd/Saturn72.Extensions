@@ -7,7 +7,7 @@
     <ProjectGuid>{16EA0E78-4840-44EF-A9BD-3453763EEEE2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Saturn72.Utils.Tests</RootNamespace>
+    <RootNamespace>Saturn72.Extensions.Tests</RootNamespace>
     <AssemblyName>Saturn72.Utils.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GenericListTypeConverterTests.cs" />
-    <Compile Include="FileSystemObjectTests.cs" />
+    <Compile Include="FileSystemUtilTests.cs" />
     <Compile Include="HtmlUtilTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionUtilTests.cs" />

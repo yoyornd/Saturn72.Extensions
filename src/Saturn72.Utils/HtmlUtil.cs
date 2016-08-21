@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 #endregion
 
-namespace Saturn72.Utils
+namespace Saturn72.Extensions
 {
     public class HtmlUtil
     {

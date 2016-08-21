@@ -4,7 +4,7 @@ using System;
 
 #endregion
 
-namespace Saturn72.Utils
+namespace Saturn72.Extensions
 {
     public static class UriUtil
     {

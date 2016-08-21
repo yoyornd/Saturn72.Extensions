@@ -7,7 +7,7 @@ using System.Web;
 
 #endregion
 
-namespace Saturn72.Utils
+namespace Saturn72.Extensions
 {
     public class WebDownloader
     {
@@ -43,11 +43,12 @@ namespace Saturn72.Utils
             var request = (HttpWebRequest) WebRequest.Create(imageUri);
             using (var response = (HttpWebResponse) request.GetResponse())
             {
-                if(!(response.StatusCode == HttpStatusCode.OK ||
-                                  response.StatusCode == HttpStatusCode.Moved ||
-                                  response.StatusCode == HttpStatusCode.Redirect) &&
-                                 response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase))
-                    throw new HttpRequestValidationException("The given url does not contain downloadable image: " + imageUri);
+                if (!(response.StatusCode == HttpStatusCode.OK ||
+                      response.StatusCode == HttpStatusCode.Moved ||
+                      response.StatusCode == HttpStatusCode.Redirect) &&
+                    response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase))
+                    throw new HttpRequestValidationException("The given url does not contain downloadable image: " +
+                                                             imageUri);
 
                 byte[] result;
                 var temp = Path.GetTempFileName();

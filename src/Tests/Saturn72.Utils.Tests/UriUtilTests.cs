@@ -2,11 +2,12 @@
 
 using System;
 using NUnit.Framework;
+using Saturn72.Extensions;
 using Saturn72.UnitTesting.Framework;
 
 #endregion
 
-namespace Saturn72.Utils.Tests
+namespace Saturn72.Extensions.Tests
 {
     public class UriUtilTests
     {
