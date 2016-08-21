@@ -10,7 +10,7 @@ namespace Saturn72.Extensions
         {
             try
             {
-                return Process.GetProcessById(process.Id).IsNull();
+                return Process.GetProcessById(process.Id).NotNull();
             }
             catch (InvalidOperationException)
             {
@@ -28,6 +28,18 @@ namespace Saturn72.Extensions
                 throw new ExternalException("Process could not exit in give timeout.\nTimeout: {0}".AsFormat(timeout));
 
             return (int) exitCode;
+        }
+
+        public static string StartInfoAsString(this Process proc)
+
+        {
+            return AsString(proc.StartInfo);
+        }
+
+        public static string AsString(this ProcessStartInfo psi)
+        {
+            const string format = "File name: {0}\nArguments: {1}\nWorking directory: {2}";
+            return string.Format(format, psi.FileName, psi.Arguments, psi.WorkingDirectory);
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]

@@ -1,13 +1,34 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 
+#endregion
+
 namespace Saturn72.Extensions
 {
     public static class XElementExtensions
     {
+        public static string GetAttributeValueOrDefault(this XElement element, string attributeName, string defaultValue)
+        {
+            var att = element.Attribute(attributeName);
+
+            return att == null ? defaultValue : att.Value;
+        }
+
+        public static string GetAttributeValueOrDefault(this XElement element, string attributeName)
+        {
+            return GetAttributeValueOrDefault(element, attributeName, default(string));
+        }
+
+        public static string GetAttributeValue(this XElement element, string attributeName)
+        {
+            return element.Attribute(attributeName).Value;
+        }
+
         public static string GetInnerElementValue(this XElement source, string innerElementName)
         {
             if (source == null)
@@ -45,7 +66,7 @@ namespace Saturn72.Extensions
             Guard.NotEmpty(elements);
 
             var result = new List<KeyValuePair<string, string>>(elements.Count());
-            elements.ForEachItem(e=>
+            elements.ForEachItem(e =>
                 result.Add(new KeyValuePair<string, string>(e.Name.ToString(), e.Value)));
 
             return result;
