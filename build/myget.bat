@@ -1,8 +1,8 @@
 	set prjName=Saturn72.Extensions
 	set slnName=Saturn72.Extensions
 	
-	set testPrjRegEx=*.Tests
-	set testPrjBinRegEx=*test*.dll
+	set testPrjRegEx=*Tests
+	set testPrjBinRegEx=*tests.dll
 	
 	@echo Off
 
@@ -71,11 +71,34 @@
 	REM if not "%errorlevel%"=="0" goto failure
 
 	REM Package
+	echo create Build directory (if not exists)
 	mkdir Build
+	echo Packging all listed projects
+	
+	REM - general project packing
 	echo Packging %prjCs% project to Build directory
-	call %NuGet% pack %prjCs% -symbols -o Build -p Configuration=%config% %version%
+	set tmpPrjCs=%prjCs%
+	call %NuGet% pack %tmpPrjCs% -symbols -o Build -p Configuration=%config% %version%
 	if not "%errorlevel%"=="0" goto failure
-
+	
+	REM In case multiple packages required - explicit nuget package for each project
+	set tmpPrjName=Saturn72.Extensions.AspNet
+	set tmpPrjCs=%srcDir%\%tmpPrjName%\%tmpPrjName%.csproj
+	call %NuGet% pack %tmpPrjCs% -symbols -o Build -p Configuration=%config% %version%
+	if not "%errorlevel%"=="0" goto failure
+	
+	REM In case multiple packages required - explicit nuget package for each project
+	set tmpPrjName=Saturn72.Extensions.Data
+	set tmpPrjCs=%srcDir%\%tmpPrjName%\%tmpPrjName%.csproj
+	call %NuGet% pack %tmpPrjCs% -symbols -o Build -p Configuration=%config% %version%
+	if not "%errorlevel%"=="0" goto failure	
+	
+	REM In case multiple packages required - explicit nuget package for each project
+	set tmpPrjName=Saturn72.Utils
+	set tmpPrjCs=%srcDir%\%tmpPrjName%\%tmpPrjName%.csproj
+	call %NuGet% pack %tmpPrjCs% -symbols -o Build -p Configuration=%config% %version%
+	if not "%errorlevel%"=="0" goto failure	
+	
 	goto success
 
 	:success
