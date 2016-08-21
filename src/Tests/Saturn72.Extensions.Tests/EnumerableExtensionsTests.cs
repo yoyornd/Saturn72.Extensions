@@ -29,10 +29,43 @@ namespace Saturn72.Extensions.Tests
             var i = 0;
             Assert.Throws<NullReferenceException>(() => ((List<object>) null).ForEachItem(c => i++));
         }
+        [Test]
+        public void IsEmptyOrNull_returnsTrueCases()
+        {
+            new List<string>().IsEmptyOrNull().ShouldBeTrue();
+
+            ((IEnumerable<string>)null).IsEmptyOrNull().ShouldBeTrue();
+            "".IsEmptyOrNull().ShouldBeTrue();
+        }
+
+      
+
+        [Test]
+        public void IsEmptyOrNull_ReturnsFalseCases()
+        {
+            "Test".IsEmptyOrNull().ShouldBeFalse();
+        }
+
+        [Test]
+        public void NotEmptyOrNull_returnsFalseCases()
+        {
+            new List<string>().NotEmptyOrNull().ShouldBeFalse();
+
+            ((IEnumerable<string>)null).NotEmptyOrNull().ShouldBeFalse();
+
+            "".NotEmptyOrNull().ShouldBeFalse();
+        }
+
+        [Test]
+        public void NotEmptyOrNull_ReturnsTrue()
+        {
+            "Test".NotEmptyOrNull().ShouldBeTrue();
+        }
 
         [Test]
         public void IsEmpty_ReturnsFalse()
         {
+
             (new[] {"test"}).IsEmpty().ShouldBeFalse();
         }
 

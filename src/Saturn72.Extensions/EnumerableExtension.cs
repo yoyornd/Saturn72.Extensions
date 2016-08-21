@@ -7,6 +7,15 @@ namespace Saturn72.Extensions
 {
     public static class EnumerableExtension
     {
+        public static bool IsEmptyOrNull(this IEnumerable source)
+        {
+            return source == null || !source.GetEnumerator().MoveNext();
+        }
+
+        public static bool NotEmptyOrNull(this IEnumerable source)
+        {
+            return !IsEmptyOrNull(source);
+        }
         public static bool NotEmpty<T>(this IEnumerable<T> source)
         {
             return !IsEmpty(source);
