@@ -9,7 +9,7 @@ using System.Web;
 
 namespace Saturn72.Extensions
 {
-    public static class FileSystemObject
+    public static class FileSystemUtil
     {
         public static void DeleteFile(string filePath)
         {

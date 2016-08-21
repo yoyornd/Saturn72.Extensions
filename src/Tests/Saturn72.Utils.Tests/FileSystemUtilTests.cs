@@ -16,7 +16,7 @@ namespace Saturn72.Extensions.Tests
         public void RelativeToAbsolute_NonBackslashedPath()
         {
             var relativePath = "Plugins";
-            var result = FileSystemObject.RelativePathToAbsolutePath(relativePath);
+            var result = FileSystemUtil.RelativePathToAbsolutePath(relativePath);
 
             var expectedPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
             expectedPath.ShouldEqual(result);
@@ -26,7 +26,7 @@ namespace Saturn72.Extensions.Tests
         public void FileExists_ReturnTrueOnExistsFile()
         {
             var fileName = Path.GetTempFileName();
-            var res = FileSystemObject.FileExists(fileName);
+            var res = FileSystemUtil.FileExists(fileName);
             File.Delete(fileName);
             res.ShouldBeTrue();
         }
@@ -38,7 +38,7 @@ namespace Saturn72.Extensions.Tests
             var fileName = @"C:\temp\NotExistsFile.txt";
             DeleteFileIfExists(fileName);
 
-            Assert.False(FileSystemObject.FileExists(fileName));
+            Assert.False(FileSystemUtil.FileExists(fileName));
         }
 
         [Test]
@@ -46,27 +46,27 @@ namespace Saturn72.Extensions.Tests
         {
             var fileName = Path.GetTempFileName();
             DeleteFileIfExists(fileName);
-            FileSystemObject.FileExists(fileName).ShouldBeFalse();
+            FileSystemUtil.FileExists(fileName).ShouldBeFalse();
             //throws
-            typeof(FileNotFoundException).ShouldBeThrownBy(() => FileSystemObject.FileExists(fileName, true));
+            typeof(FileNotFoundException).ShouldBeThrownBy(() => FileSystemUtil.FileExists(fileName, true));
         }
 
         [Test]
         public void FileExists_Throws_OnEmptyPath()
         {
             var fileName = "";
-            FileSystemObject.FileExists(fileName).ShouldBeFalse();
+            FileSystemUtil.FileExists(fileName).ShouldBeFalse();
             //throws
-            typeof(FileNotFoundException).ShouldBeThrownBy(() => FileSystemObject.FileExists(fileName, true));
+            typeof(FileNotFoundException).ShouldBeThrownBy(() => FileSystemUtil.FileExists(fileName, true));
         }
 
         [Test]
         public void FileExists_OnBadPath()
         {
             var fileName = "dddddd//dsdfsdfsdfsdfsdf";
-            FileSystemObject.FileExists(fileName).ShouldBeFalse();
+            FileSystemUtil.FileExists(fileName).ShouldBeFalse();
             //throws
-            typeof(FileNotFoundException).ShouldBeThrownBy(() => FileSystemObject.FileExists(fileName, true));
+            typeof(FileNotFoundException).ShouldBeThrownBy(() => FileSystemUtil.FileExists(fileName, true));
         }
 
         [Test]
@@ -74,7 +74,7 @@ namespace Saturn72.Extensions.Tests
         {
             var file = Path.GetTempFileName();
 
-            FileSystemObject.DeleteFile(file);
+            FileSystemUtil.DeleteFile(file);
             var res = File.Exists(file);
 
             //we delete here in order to prevent file stay in file system on dailure
