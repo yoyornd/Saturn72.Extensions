@@ -32,4 +32,4 @@ _ReSharper*/
 
 
 #exclude patterns
-!**/*.Tests/Resources/
+!**/*.Tests/Resources/*
