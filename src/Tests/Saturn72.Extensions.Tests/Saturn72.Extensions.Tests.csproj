@@ -67,6 +67,11 @@
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\RunsInLoop.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
