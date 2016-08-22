@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace Saturn72.Extensions
 {
@@ -11,7 +15,12 @@ namespace Saturn72.Extensions
 
         public static string NullableDateTimeToString(this DateTime? dateTime)
         {
-            return dateTime.HasValue ? dateTime.Value.ToString("G") : "";
+            return dateTime?.ToString("G") ?? string.Empty;
+        }
+
+        public static bool SecondTimeSpanHasPass(this DateTime sourceUtcDateTime, int seconds)
+        {
+            return sourceUtcDateTime.AddSeconds(seconds) < DateTime.UtcNow;
         }
     }
 }
