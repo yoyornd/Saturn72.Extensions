@@ -129,6 +129,12 @@ namespace Saturn72.Extensions.Tests
         }
 
         [Test]
+        public void RelativeToAbsolute_DotAsPath()
+        {
+            FileSystemUtil.RelativePathToAbsolutePath(".").ShouldEqual(AppDomain.CurrentDomain.BaseDirectory);
+        }
+
+        [Test]
         public void FileExists_ReturnTrueOnExistsFile()
         {
             var fileName = Path.GetTempFileName();

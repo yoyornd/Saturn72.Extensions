@@ -55,11 +55,16 @@ namespace Saturn72.Extensions
                 File.Delete(filePath);
         }
 
-        public static string RelativePathToAbsolutePath(string subFolder)
+        public static string RelativePathToAbsolutePath(string relativePath)
         {
+            if (relativePath == ".")
+                relativePath = string.Empty;
+            if (relativePath.Contains(@"\.\"))
+                relativePath = relativePath.Replace(@"\.\", @"\");
+
             return HttpContext.Current == null
-                ? FileSystemRelativePathToAbsolutePath(subFolder)
-                : WebRelativePathToAbsolutePath(subFolder);
+                ? FileSystemRelativePathToAbsolutePath(relativePath)
+                : WebRelativePathToAbsolutePath(relativePath);
         }
 
         private static string WebRelativePathToAbsolutePath(string subFolder)
