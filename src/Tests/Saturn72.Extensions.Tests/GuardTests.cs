@@ -1,8 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 using NUnit.Framework;
 using Saturn72.UnitTesting.Framework;
+
+#endregion
 
 namespace Saturn72.Extensions.Tests
 {
@@ -13,7 +18,7 @@ namespace Saturn72.Extensions.Tests
         {
             var str = "test";
             Guard.MustFollow(str.Length == 4, () => str = str.ToUpper());
-           "test".ShouldEqual(str);
+            "test".ShouldEqual(str);
         }
 
         [Test]
@@ -39,6 +44,7 @@ namespace Saturn72.Extensions.Tests
             Guard.HasValue("test", () => x++);
             0.ShouldEqual(x);
         }
+
         [Test]
         public void HasValue_TriggersAction()
         {
@@ -46,10 +52,11 @@ namespace Saturn72.Extensions.Tests
             Guard.HasValue("", () => x++);
             1.ShouldEqual(x);
         }
+
         [Test]
         public void HasValue_ThrowsExceptionOnEmptyString()
         {
-            typeof (ArgumentNullException).ShouldBeThrownBy(
+            typeof(ArgumentNullException).ShouldBeThrownBy(
                 () => Guard.HasValue("", () => { throw new ArgumentNullException(); }));
         }
 
@@ -62,7 +69,7 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void NotNull_ThrowsNullReferenceExceptionWithMessage()
         {
-            typeof (NullReferenceException).ShouldBeThrownBy(() => Guard.NotNull((object) null, "message"), "message");
+            typeof(NullReferenceException).ShouldBeThrownBy(() => Guard.NotNull((object) null, "message"), "message");
         }
 
         [Test]
@@ -71,6 +78,45 @@ namespace Saturn72.Extensions.Tests
             var x = 0;
             Guard.NotNull((object) null, () => x++);
             1.ShouldEqual(x);
+        }
+
+        [Test]
+        public void FileExists_Throws()
+        {
+            //create and delete file
+            var file = Path.GetTempFileName();
+            Thread.Sleep(500);
+            File.Delete(file);
+            Thread.Sleep(500);
+
+            typeof(FileNotFoundException).ShouldBeThrownBy(() => Guard.FileExists(file));
+            typeof(FileNotFoundException).ShouldBeThrownBy(() => Guard.FileExists(file), file);
+
+            var i = 100;
+            Guard.FileExists(file, () => i = 10);
+            i.ShouldEqual(10);
+        }
+        [Test]
+        public void FileExists_NotThrowing()
+        {
+            //create and delete file
+            var file = Path.GetTempFileName();
+            Thread.Sleep(500);
+
+
+            try
+            {
+                Guard.FileExists(file);
+                Guard.FileExists(file, "message");
+
+                var i = 100;
+                Guard.FileExists(file, () => i = 10);
+                i.ShouldEqual(100);
+            }
+            finally
+            {
+                File.Delete(file);
+            }
         }
     }
 }

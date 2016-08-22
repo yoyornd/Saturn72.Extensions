@@ -1,5 +1,6 @@
 ﻿#region
 
+using Saturn72.Extensions;
 using System;
 using System.IO;
 using System.Linq;
@@ -107,27 +108,31 @@ namespace Saturn72.Extensions
 
         public static void MoveFileAsync(string source, string destination)
         {
-            if (!File.Exists(source))
-                throw new FileNotFoundException(source);
+            new Task(() => MoveFile(source, destination)).Start();
+        }
+
+        public static void MoveFile(string source, string destination)
+        {
+            Guard.HasValue(source);
+            Guard.HasValue(destination);
+            Guard.FileExists(source);
 
             var temp = Path.GetTempFileName();
-
-            new Task(() =>
+            
+            try
             {
-                try
+                if (FileExists(destination))
                 {
-                    if (FileExists(destination))
-                    {
-                        File.Delete(temp);
-                        File.Move(destination, temp);
-                    }
-                    File.Move(source, destination);
+                    File.Delete(temp);
+                    File.Move(destination, temp);
                 }
-                catch (Exception)
-                {
-                    File.Move(temp, destination);
-                }
-            }).Start();
+                File.Move(source, destination);
+            }
+            catch (Exception ex)
+            {
+                File.Move(temp, destination);
+                throw ex;
+            }
         }
 
         public static string GetFileNameFromUri(string uri)

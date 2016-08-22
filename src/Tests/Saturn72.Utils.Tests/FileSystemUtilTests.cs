@@ -2,8 +2,8 @@
 
 using System;
 using System.IO;
+using System.Threading;
 using NUnit.Framework;
-using Saturn72.Extensions;
 using Saturn72.UnitTesting.Framework;
 
 #endregion
@@ -12,6 +12,53 @@ namespace Saturn72.Extensions.Tests
 {
     public class FileSystemUtilTests
     {
+        [Test]
+        public void MoveFile_Throws()
+        {
+            //on null source
+            typeof(NullReferenceException).ShouldBeThrownBy(() => FileSystemUtil.MoveFile(null, null));
+            //on empty source
+            typeof(ArgumentException).ShouldBeThrownBy(() => FileSystemUtil.MoveFile(string.Empty, null));
+            //on whitespace
+            typeof(ArgumentException).ShouldBeThrownBy(() => FileSystemUtil.MoveFile("   ", null));
+
+            //on null destination
+            typeof(NullReferenceException).ShouldBeThrownBy(() => FileSystemUtil.MoveFile("ttt", null));
+            //on empty destination
+            typeof(ArgumentException).ShouldBeThrownBy(() => FileSystemUtil.MoveFile("ttt", string.Empty));
+            //on not exist source
+            typeof(ArgumentException).ShouldBeThrownBy(() => FileSystemUtil.MoveFile("ttt", "   "));
+
+            //Source file not exists
+            var file = Path.GetTempFileName();
+            Thread.Sleep(1000);
+            File.Delete(file);
+            typeof(FileNotFoundException).ShouldBeThrownBy(() => FileSystemUtil.MoveFile(file, "FFF"));
+        }
+
+        [Test]
+        public void MoveFile_FileMoved()
+        {
+            //Source file not exists
+            var src = Path.GetTempFileName();
+            var dest = Path.GetTempFileName();
+            Thread.Sleep(300);
+
+            try
+            {
+                File.Delete(dest);
+                FileSystemUtil.MoveFile(src, dest);
+                File.Exists(src).ShouldBeFalse();
+                File.Exists(dest).ShouldBeTrue();
+            }
+            finally
+
+            {
+                DeleteFileIfExists(src);
+                DeleteFileIfExists(dest);
+            }
+        }
+
         [Test]
         public void RelativeToAbsolute_NonBackslashedPath()
         {

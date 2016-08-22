@@ -44,6 +44,12 @@
     <Compile Include="UriUtil.cs" />
     <Compile Include="WebDownloader.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Saturn72.Extensions\Saturn72.Extensions.csproj">
+      <Project>{773F4467-A469-4196-A9B3-76A6C889C3ED}</Project>
+      <Name>Saturn72.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

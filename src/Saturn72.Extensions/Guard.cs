@@ -65,11 +65,12 @@ namespace Saturn72.Extensions
 
         public static void HasValue(string source)
         {
-            MustFollow(source.HasValue,"String value required");
+            HasValue(source, "String value required");
         }
 
         public static void HasValue(string source, string message)
         {
+            NotNull(source);
             MustFollow(source.HasValue,
                 () => { throw new ArgumentException(message, "source"); });
         }
@@ -102,7 +103,7 @@ namespace Saturn72.Extensions
 
         public static void FileExists(string fileName)
         {
-            MustFollow(() => File.Exists(fileName), fileName);
+            FileExists(fileName, fileName);
         }
 
         public static void FileExists(string fileName, string message)

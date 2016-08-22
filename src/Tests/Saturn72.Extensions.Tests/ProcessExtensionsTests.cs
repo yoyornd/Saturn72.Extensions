@@ -32,12 +32,12 @@ namespace Saturn72.Extensions.Tests
         {
             new Process().IsRunning().ShouldBeFalse();
 
-            var curDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var curDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
             var file = Path.Combine(curDir, "resources\\RunsInLoop.exe");
             var proc = Process.Start(file);
             Thread.Sleep(3000);
             proc.Kill();
-            Thread.Sleep(3000);
+            Thread.Sleep(500);
             Assert.False(proc.IsRunning());
         }
 
@@ -47,13 +47,11 @@ namespace Saturn72.Extensions.Tests
             typeof(NullReferenceException).ShouldBeThrownBy(() => ((Process) null).StartInfoAsString());
         }
 
-
         [Test]
         public void AsString_Throws()
         {
             typeof(NullReferenceException).ShouldBeThrownBy(() => ((ProcessStartInfo) null).AsString());
         }
-
 
         [Test]
         public void StartInfoAsString_ReturnsStringWithValues()
