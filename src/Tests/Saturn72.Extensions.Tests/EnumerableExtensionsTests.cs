@@ -1,7 +1,9 @@
 ﻿#region
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Saturn72.UnitTesting.Framework;
 
@@ -29,16 +31,16 @@ namespace Saturn72.Extensions.Tests
             var i = 0;
             Assert.Throws<NullReferenceException>(() => ((List<object>) null).ForEachItem(c => i++));
         }
+
         [Test]
         public void IsEmptyOrNull_returnsTrueCases()
         {
             new List<string>().IsEmptyOrNull().ShouldBeTrue();
 
-            ((IEnumerable<string>)null).IsEmptyOrNull().ShouldBeTrue();
+            ((IEnumerable<string>) null).IsEmptyOrNull().ShouldBeTrue();
             "".IsEmptyOrNull().ShouldBeTrue();
         }
 
-      
 
         [Test]
         public void IsEmptyOrNull_ReturnsFalseCases()
@@ -51,7 +53,7 @@ namespace Saturn72.Extensions.Tests
         {
             new List<string>().NotEmptyOrNull().ShouldBeFalse();
 
-            ((IEnumerable<string>)null).NotEmptyOrNull().ShouldBeFalse();
+            ((IEnumerable<string>) null).NotEmptyOrNull().ShouldBeFalse();
 
             "".NotEmptyOrNull().ShouldBeFalse();
         }
@@ -65,7 +67,6 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void IsEmpty_ReturnsFalse()
         {
-
             (new[] {"test"}).IsEmpty().ShouldBeFalse();
         }
 
@@ -153,6 +154,47 @@ namespace Saturn72.Extensions.Tests
         public void IsEmpty_Empty_ReturnsTrue()
         {
             new string[] {}.IsEmpty().ShouldBeTrue();
+        }
+
+        [Test]
+        public void ItemCount_Throws()
+        {
+            //on null enum
+            typeof(NullReferenceException).ShouldBeThrownBy(() => ((IEnumerable) null).ItemCount());
+        }
+
+        [Test]
+        public void ItemCount_ReturnsCount()
+        {
+            //on empty collection
+            new int[] {}.ItemCount().ShouldEqual(0);
+            new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}.ItemCount().ShouldEqual(10);
+        }
+
+        [Test]
+        public void Random_Throws()
+        {
+            //on null item
+            typeof(NullReferenceException).ShouldBeThrownBy(() => ((IEnumerable<object>) null).Random());
+            //on empty enumerable
+            typeof(ArgumentException).ShouldBeThrownBy(() => new int[] {}.Random());
+        }
+
+
+        [Test]
+        public void Random_PicksItems()
+        {
+            var action = new Action(() =>
+            {
+                var source = new[] {1, 2, 3, 4, 5, 6};
+                var actualValue = source.Random();
+                Assert.IsTrue(source.Contains(actualValue));
+            });
+
+            for (int i = 0; i < 1000; i++)
+            {
+                action();
+            }
         }
 
         public class TestClass

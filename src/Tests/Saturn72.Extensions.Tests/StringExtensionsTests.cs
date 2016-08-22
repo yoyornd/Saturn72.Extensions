@@ -181,5 +181,36 @@ namespace Saturn72.Extensions.Tests
 
             Assert.AreEqual("This is source", source.RemoveNewLineEscape());
         }
+
+        [Test]
+        public void IsUrl_returnsTrueOnHttpUrl()
+        {
+            Assert.True("https://www.test.com".IsUrl());
+        }
+
+        [Test]
+        public void IsUrl_returnsTrueOnHttpsUrl()
+        {
+            Assert.True("http://www.test.com".IsUrl());
+        }
+
+        [Test]
+        public void IsUrl_returnsTrueOnFileSystemUrlUrl()
+        {
+            Assert.True("file:///c:/WINDOWS/clock.avi".IsUrl());
+        }
+
+        [Test]
+        public void IsUrl_ReturnsFalseOnEmptyString()
+        {
+            Assert.False("".IsUrl());
+            Assert.False(((string)null).IsUrl());
+        }
+
+        [Test]
+        public void IsUrl_ReturnsFalseOnIllegalUrl()
+        {
+            Assert.False("This is not url".IsUrl());
+        }
     }
 }

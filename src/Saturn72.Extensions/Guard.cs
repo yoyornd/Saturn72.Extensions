@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -80,23 +81,23 @@ namespace Saturn72.Extensions
             MustFollow(source.HasValue, action);
         }
 
-        public static void NotEmpty<T>(IEnumerable<T>[] source)
+        public static void NotEmpty<T>(IEnumerable[] source)
         {
             foreach (var s in source)
                 NotEmpty(s);
         }
 
-        public static void NotEmpty<T>(IEnumerable<T> source)
+        public static void NotEmpty(IEnumerable source)
         {
             NotEmpty(source,"The source sequence is empty.");
         }
 
-        public static void NotEmpty<T>(IEnumerable<T> source, Action notEmptyAction)
+        public static void NotEmpty(IEnumerable source, Action notEmptyAction)
         {
-            MustFollow(!source.IsNull() && source.Any(), notEmptyAction);
+            MustFollow(!source.IsNull() && source.GetEnumerator().MoveNext(), notEmptyAction);
         }
 
-        public static void NotEmpty<T>(IEnumerable<T> source, string message)
+        public static void NotEmpty(IEnumerable source, string message)
         {
             NotEmpty(source, () => { throw new ArgumentException(message); });
         }

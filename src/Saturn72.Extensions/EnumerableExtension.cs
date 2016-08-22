@@ -1,12 +1,27 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace Saturn72.Extensions
 {
     public static class EnumerableExtension
     {
+        public static int ItemCount(this IEnumerable source)
+        {
+            Guard.NotNull(source);
+            var counter = 0;
+            var e = source.GetEnumerator();
+            while (e.MoveNext())
+                counter++;
+            return counter;
+        }
+
+
         public static bool IsEmptyOrNull(this IEnumerable source)
         {
             return source == null || !source.GetEnumerator().MoveNext();
@@ -16,6 +31,7 @@ namespace Saturn72.Extensions
         {
             return !IsEmptyOrNull(source);
         }
+
         public static bool NotEmpty<T>(this IEnumerable<T> source)
         {
             return !IsEmpty(source);
@@ -29,7 +45,7 @@ namespace Saturn72.Extensions
         public static bool IsIEnumerableofType(this Type type)
         {
             var genArgs = type.GetGenericArguments();
-            if (genArgs.Length == 1 && typeof (IEnumerable<>).MakeGenericType(genArgs).IsAssignableFrom(type))
+            if (genArgs.Length == 1 && typeof(IEnumerable<>).MakeGenericType(genArgs).IsAssignableFrom(type))
                 return true;
             return type.BaseType != null && IsIEnumerableofType(type.BaseType);
         }
@@ -76,6 +92,18 @@ namespace Saturn72.Extensions
             return source.MaxBy(selector, Comparer<TKey>.Default);
         }
 
+        public static T Random<T>(this IEnumerable<T> source)
+        {
+            //var c = source.Cast<T>();
+            Guard.NotNull(source);
+            Guard.NotEmpty(source);
+
+            var seed = (int) DateTime.Now.Ticks & 0x0000FFFF;
+            var randomIndex = new Random(seed).Next(source.Count());
+            return source.ElementAtOrDefault(randomIndex);
+        }
+
+
         /// <summary>
         ///     Gets the max IEnumerable object by internal property
         /// </summary>
@@ -88,7 +116,7 @@ namespace Saturn72.Extensions
         public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source,
             Func<TSource, TKey> selector, IComparer<TKey> comparer)
         {
-            Guard.NotNull(new object[] { source, selector, comparer});
+            Guard.NotNull(new object[] {source, selector, comparer});
 
             var sourceIterator = source.GetEnumerator();
             if (!sourceIterator.MoveNext())
@@ -124,7 +152,7 @@ namespace Saturn72.Extensions
         }
 
         private static IEnumerable<T> SortByOrder<T, TKey>(IEnumerable<T> source, Func<T, TKey> keySelector,
-          bool inAscendOrder)
+            bool inAscendOrder)
         {
             Guard.NotNull(source, nameof(source));
             Guard.NotEmpty(source, nameof(source));

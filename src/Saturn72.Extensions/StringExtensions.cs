@@ -7,6 +7,15 @@ namespace Saturn72.Extensions
 {
     public static class StringExtensions
     {
+        public static bool IsUrl(this string source)
+        {
+            Uri uriResult;
+            bool result = Uri.TryCreate(source, UriKind.Absolute, out uriResult)
+                && new[] { Uri.UriSchemeHttp, Uri.UriSchemeHttps, Uri.UriSchemeFile }.Contains(uriResult.Scheme);
+
+            return result;
+        }
+
         public static string RemoveNewLineEscape(this string str)
         {
             Guard.NotNull(str);
