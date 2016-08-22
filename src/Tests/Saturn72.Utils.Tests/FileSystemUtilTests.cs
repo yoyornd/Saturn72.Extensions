@@ -13,6 +13,65 @@ namespace Saturn72.Extensions.Tests
     public class FileSystemUtilTests
     {
         [Test]
+        public void DeleteDirectoryContent_throws()
+        {
+            var notExistsPath = Path.Combine(Directory.GetCurrentDirectory(),
+                DateTime.Now.ToString("F").Replace(":", "-"));
+            typeof(DirectoryNotFoundException).ShouldBeThrownBy(
+                () => FileSystemUtil.DeleteDirectoryContent(notExistsPath));
+        }
+        [Test]
+        public void DeleteDirectoryContent_DeleteDirContent()
+        {
+            var dirPath = Path.GetTempFileName();
+            DeleteFileIfExists(dirPath);
+
+            for (int i = 0; i < 5; i++)
+            {
+                var subDir = Path.Combine(dirPath, i.ToString());
+                Directory.CreateDirectory(subDir);
+
+                for (int j = 10 - i; j < 0; j--)
+                    File.CreateText(Path.Combine(subDir, string.Format("{0}.txt", j))).Close();
+            }
+            Thread.Sleep(500);
+
+            try
+            {
+                FileSystemUtil.DeleteDirectoryContent(dirPath);
+                Directory.GetDirectories(dirPath).Length.ShouldEqual(0);
+                Directory.GetFiles(dirPath).Length.ShouldEqual(0);
+            }
+            finally
+            {
+                Directory.Delete(dirPath);
+            }
+        }
+        [Test]
+        public void DirectoryExists_throws()
+        {
+            //dir not exists = 
+            var notExistsPath = Path.Combine(Directory.GetCurrentDirectory(), DateTime.Now.ToString("F").Replace(":", "-"));
+            typeof(DirectoryNotFoundException).ShouldBeThrownBy(() => FileSystemUtil.DirectoryExists(notExistsPath, true));
+        }
+
+        [Test]
+        public void DirectoryExists_Returns_False()
+        {
+            //dir not exists = 
+            var notExistsPath = Path.Combine(Directory.GetCurrentDirectory(), DateTime.Now.ToString("F").Replace(":", "-"));
+            FileSystemUtil.DirectoryExists(notExistsPath).ShouldBeFalse();
+        }
+
+        [Test]
+        public void DirectoryExists_ReturnsTrue()
+        {
+            //dir not exists = 
+            var path = Directory.GetCurrentDirectory();
+            FileSystemUtil.DirectoryExists(path).ShouldBeTrue();
+        }
+
+        [Test]
         public void MoveFile_Throws()
         {
             //on null source

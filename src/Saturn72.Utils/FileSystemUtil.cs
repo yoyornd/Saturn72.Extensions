@@ -1,6 +1,5 @@
 ﻿#region
 
-using Saturn72.Extensions;
 using System;
 using System.IO;
 using System.Linq;
@@ -19,8 +18,8 @@ namespace Saturn72.Extensions
         /// <param name="path">path to directory</param>
         public static void DeleteDirectoryContent(string path)
         {
-            if (!Directory.Exists(path))
-                return;
+            DirectoryExists(path, true);
+
             foreach (var dir in Directory.GetDirectories(path))
                 Directory.Delete(dir, true);
 
@@ -39,8 +38,8 @@ namespace Saturn72.Extensions
         {
             if (!Directory.Exists(path))
                 return;
-            var ignoredExtensions = IsNullEmptyOrWhiteSpaces(ignoredFileExtensions)
-                ? ignoredFileExtensions.Split(',').Where(x => IsNullEmptyOrWhiteSpaces(x)).Select(x => x.Trim())
+            var ignoredExtensions = ignoredFileExtensions.NotEmptyOrNull()
+                ? ignoredFileExtensions.Split(',').Where(x => x.HasValue()).Select(x => x.Trim())
                 : new string[] {};
             var files =
                 Directory.GetFiles(path).Where(f => !ignoredExtensions.Contains(Path.GetExtension(f).Substring(1)));
@@ -83,6 +82,21 @@ namespace Saturn72.Extensions
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, rPath);
         }
 
+        /// <summary>
+        ///     Checks if directory exists
+        /// </summary>
+        /// <param name="path">Directory path</param>
+        /// <param name="throwIfNotExists">Should exception be thrown id not exists</param>
+        /// <returns>true if exists, else false</returns>
+        public static bool DirectoryExists(string path, bool throwIfNotExists = false)
+        {
+            var result = Directory.Exists(path);
+            if (!result && throwIfNotExists)
+                throw new DirectoryNotFoundException(path);
+
+            return result;
+        }
+
         public static void DeleteDirectory(string directoryToDelete)
         {
             if (Directory.Exists(directoryToDelete))
@@ -118,7 +132,7 @@ namespace Saturn72.Extensions
             Guard.FileExists(source);
 
             var temp = Path.GetTempFileName();
-            
+
             try
             {
                 if (FileExists(destination))
@@ -161,9 +175,5 @@ namespace Saturn72.Extensions
                    source.Substring(toIndex, source.Length - toIndex);
         }
 
-        private static bool IsNullEmptyOrWhiteSpaces(string source)
-        {
-            return string.IsNullOrWhiteSpace(source) || string.IsNullOrEmpty(source);
-        }
     }
 }
