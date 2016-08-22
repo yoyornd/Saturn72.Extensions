@@ -96,6 +96,7 @@ namespace Saturn72.Extensions.Tests
             Guard.FileExists(file, () => i = 10);
             i.ShouldEqual(10);
         }
+
         [Test]
         public void FileExists_NotThrowing()
         {
@@ -117,6 +118,29 @@ namespace Saturn72.Extensions.Tests
             {
                 File.Delete(file);
             }
+        }
+
+
+        public void ContainsKey_Throws()
+        {
+            //on null dictionary
+            typeof(NullReferenceException).ShouldBeThrownBy(
+                () => Guard.ContainsKey((IDictionary<object, object>) null, 9));
+        }
+
+        [Test]
+        public void ContainsKey_KeyNotExists()
+        {
+            var dictionary = new Dictionary<int, int> {{1, 1}, {2, 2}, {3, 4}};
+
+            typeof(KeyNotFoundException).ShouldBeThrownBy(() => Guard.ContainsKey(dictionary, 9));
+        }
+
+        [Test]
+        public void ContainsKey_KeyExists()
+        {
+            var dictionary = new Dictionary<int, int> {{1, 1}, {2, 2}, {3, 4}};
+            Assert.DoesNotThrow(() => Guard.ContainsKey(dictionary, 1));
         }
     }
 }

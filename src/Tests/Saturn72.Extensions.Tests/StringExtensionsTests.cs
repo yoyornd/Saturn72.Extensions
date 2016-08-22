@@ -160,5 +160,26 @@ namespace Saturn72.Extensions.Tests
 
             "TTT 2 System.Object".ShouldEqual("{t1} {t2} {t3}".AsFormat(formatDictionary));
         }
+
+        [Test]
+        public void RemoveNewLineEscape_Throws()
+        {
+            typeof(NullReferenceException).ShouldBeThrownBy(() => ((string) null).RemoveNewLineEscape());
+        }
+
+        [Test]
+        public void RemoveNewLineEscape_ClearsNewLinesEscapes()
+        {
+            var source = "This\n is\nsource\n\n\n\n\n\n";
+            Assert.AreEqual("This is source ", source.RemoveNewLineEscape());
+        }
+
+        [Test]
+        public void RemoveNewLineEscape_ReturnsSourceOnNoNewLineEscapes()
+        {
+            var source = "This is source";
+
+            Assert.AreEqual("This is source", source.RemoveNewLineEscape());
+        }
     }
 }

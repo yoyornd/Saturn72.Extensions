@@ -116,5 +116,12 @@ namespace Saturn72.Extensions
         {
             MustFollow(() => File.Exists(fileName), notFoundAction);
         }
+        public static void ContainsKey<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey key)
+        {
+            NotNull(dictionary);
+
+            MustFollow(() => dictionary.ContainsKey(key),
+                () => { throw new KeyNotFoundException("The dictionary does not contain key ({0})".AsFormat(key)); });
+        }
     }
 }

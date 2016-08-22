@@ -15,10 +15,20 @@ namespace Saturn72.Extensions
         /// <param name="searchCriteria">predicate to determine if item is in collection</param>
         public static void AddIfNotExist<T>(this ICollection<T> source, T toAdd, Func<T, bool> searchCriteria)
         {
-            if (toAdd == null || source.Any(searchCriteria))
-                return;
+            Guard.NotNull(source);
             source.Add(toAdd);
         }
+
+        /// <summary>
+        /// Adds it to collection if not exists
+        /// </summary>
+        /// <typeparam name="T">Collection type</typeparam>
+        public static void AddIfNotExist<T>(this ICollection<T> source, T toAdd)
+        {
+            Func<T, bool> searchCriteria = t => t.Equals(toAdd);
+            AddIfNotExist(source, toAdd, searchCriteria);
+        }
+      
         /// <summary>
         /// Adds or overwrites collection's item
         /// </summary>

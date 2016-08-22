@@ -7,6 +7,12 @@ namespace Saturn72.Extensions
 {
     public static class StringExtensions
     {
+        public static string RemoveNewLineEscape(this string str)
+        {
+            Guard.NotNull(str);
+
+            return str.Replace(Environment.NewLine, " ").Replace("\n", " ").RemoveDuplicateWhiteSpaces();
+        }
         public static bool EqualsTo(this string source, string compareTo, bool ignoreCases = true)
         {
             if (source == null && compareTo == null)
