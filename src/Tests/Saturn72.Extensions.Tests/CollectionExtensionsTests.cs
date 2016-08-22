@@ -1,19 +1,21 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Saturn72.UnitTesting.Framework;
 
+#endregion
+
 namespace Saturn72.Extensions.Tests
 {
-   public  class CollectionExtensionsTests
+    public class CollectionExtensionsTests
     {
         [Test]
         public void AddIfNotExists_NotAddingExistsItem()
         {
-            var source = new List<int> { 1, 2, 3 };
+            var source = new List<int> {1, 2, 3};
             source.AddIfNotExist(3);
 
             var all = source.Where(x => x == 3);
@@ -23,7 +25,7 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void AddIfNotExists_AddsNewItem()
         {
-            var source = new List<int> { 1, 2, 3 };
+            var source = new List<int> {1, 2, 3};
             source.AddIfNotExist(4);
 
             source.Count.ShouldEqual(4);
@@ -41,7 +43,6 @@ namespace Saturn72.Extensions.Tests
         public void AddIfNotExists_Throws_OnNullCollection()
         {
             typeof(NullReferenceException).ShouldBeThrownBy(() => (null as IList<object>).AddIfNotExist(new object()));
-
         }
     }
 }
