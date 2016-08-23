@@ -36,8 +36,9 @@ namespace Saturn72.Extensions
         /// </param>
         public static void DeleteAllDirectoryFiles(string path, string ignoredFileExtensions = null)
         {
-            if (!Directory.Exists(path))
-                return;
+            Guard.NotEmpty(path);
+            Guard.DirectoryExists(path);
+
             var ignoredExtensions = ignoredFileExtensions.NotEmptyOrNull()
                 ? ignoredFileExtensions.Split(',').Where(x => x.HasValue()).Select(x => x.Trim())
                 : new string[] {};

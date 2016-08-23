@@ -13,13 +13,74 @@ namespace Saturn72.Extensions.Tests
     public class FileSystemUtilTests
     {
         [Test]
+        public void DeleteAllDirectoryFiles_throws()
+        {
+            //Dir not exists()
+            typeof(DirectoryNotFoundException).ShouldBeThrownBy(() => FileSystemUtil.DeleteAllDirectoryFiles("bla bla"));
+            //null as string
+            typeof(ArgumentException).ShouldBeThrownBy(() => FileSystemUtil.DeleteAllDirectoryFiles(null));
+            //empty as string
+            typeof(ArgumentException).ShouldBeThrownBy(() => FileSystemUtil.DeleteAllDirectoryFiles(string.Empty));
+        }
+
+        [Test]
+        public void DeleteAllDirecotryFiles_DeletesAllFiles()
+        {
+            var path = CreateDirectoryForDeleteAllDirecotryFilesTests();
+            FileSystemUtil.DeleteAllDirectoryFiles(path);
+            try
+            {
+                Directory.GetFiles(path).Length.ShouldEqual(0);
+            }
+            finally
+            {
+                DeleteDirectoryIfExists(path);
+            }
+        }
+
+        [Test]
+        public void DeleteAllDirecotryFiles_IgnoreExtensions()
+        {
+            var path = CreateDirectoryForDeleteAllDirecotryFilesTests();
+            FileSystemUtil.DeleteAllDirectoryFiles(path, "json, txt");
+            try
+            {
+                Directory.GetFiles(path).Length.ShouldEqual(4);
+            }
+            finally
+            {
+                DeleteDirectoryIfExists(path);
+            }
+        }
+
+        private string CreateDirectoryForDeleteAllDirecotryFilesTests()
+        {
+            var path = Path.GetTempFileName();
+            File.Delete(path);
+            Directory.CreateDirectory(path);
+            var extArray = new[] {".txt", ".json", ".xml", ".csv"};
+            for (var i = 0; i < 8; i++)
+            {
+                var ext = extArray[i%4];
+                using (File.Create(Path.Combine(path, i + ext)))
+                {
+                }
+            }
+            return path;
+        }
+
+        [Test]
         public void DeleteDirectoryContent_throws()
         {
             var notExistsPath = Path.Combine(Directory.GetCurrentDirectory(),
                 DateTime.Now.ToString("F").Replace(":", "-"));
             typeof(DirectoryNotFoundException).ShouldBeThrownBy(
                 () => FileSystemUtil.DeleteDirectoryContent(notExistsPath));
+
+            typeof(DirectoryNotFoundException).ShouldBeThrownBy(() => FileSystemUtil.DeleteDirectoryContent(null));
+            typeof(DirectoryNotFoundException).ShouldBeThrownBy(() => FileSystemUtil.DeleteDirectoryContent(""));
         }
+
         [Test]
         public void DeleteDirectoryContent_DeleteDirContent()
         {
@@ -47,19 +108,41 @@ namespace Saturn72.Extensions.Tests
                 Directory.Delete(dirPath);
             }
         }
+
+        [Test]
+        public void DeleteDirectoryContent_EmptyDir()
+        {
+            var dirPath = Path.GetTempFileName();
+            DeleteFileIfExists(dirPath);
+            Directory.CreateDirectory(dirPath);
+            try
+            {
+                FileSystemUtil.DeleteDirectoryContent(dirPath);
+                Directory.GetDirectories(dirPath).Length.ShouldEqual(0);
+                Directory.GetFiles(dirPath).Length.ShouldEqual(0);
+            }
+            finally
+            {
+                Directory.Delete(dirPath);
+            }
+        }
+
         [Test]
         public void DirectoryExists_throws()
         {
             //dir not exists = 
-            var notExistsPath = Path.Combine(Directory.GetCurrentDirectory(), DateTime.Now.ToString("F").Replace(":", "-"));
-            typeof(DirectoryNotFoundException).ShouldBeThrownBy(() => FileSystemUtil.DirectoryExists(notExistsPath, true));
+            var notExistsPath = Path.Combine(Directory.GetCurrentDirectory(),
+                DateTime.Now.ToString("F").Replace(":", "-"));
+            typeof(DirectoryNotFoundException).ShouldBeThrownBy(
+                () => FileSystemUtil.DirectoryExists(notExistsPath, true));
         }
 
         [Test]
         public void DirectoryExists_Returns_False()
         {
             //dir not exists = 
-            var notExistsPath = Path.Combine(Directory.GetCurrentDirectory(), DateTime.Now.ToString("F").Replace(":", "-"));
+            var notExistsPath = Path.Combine(Directory.GetCurrentDirectory(),
+                DateTime.Now.ToString("F").Replace(":", "-"));
             FileSystemUtil.DirectoryExists(notExistsPath).ShouldBeFalse();
         }
 
@@ -201,6 +284,19 @@ namespace Saturn72.Extensions.Tests
         {
             if (File.Exists(path))
                 File.Delete(path);
+        }
+
+        private static void DeleteDirectoryIfExists(string path)
+        {
+            if (!Directory.Exists(path))
+                return;
+
+            foreach (var file in Directory.GetFiles(path))
+            {
+                File.Delete(file);
+            }
+
+            Directory.Delete(path);
         }
 
         #endregion

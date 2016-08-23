@@ -117,6 +117,21 @@ namespace Saturn72.Extensions
         {
             MustFollow(() => File.Exists(fileName), notFoundAction);
         }
+        public static void DirectoryExists(string path)
+        {
+            DirectoryExists(path, path);
+        }
+
+        public static void DirectoryExists(string path, string message)
+        {
+            MustFollow(() => Directory.Exists(path), () => { throw new DirectoryNotFoundException(message); });
+
+        }
+
+        public static void DirectoryExists(string path, Action notFoundAction)
+        {
+            MustFollow(() => Directory.Exists(path), notFoundAction);
+        }
         public static void ContainsKey<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey key)
         {
             NotNull(dictionary);

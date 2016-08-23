@@ -89,8 +89,9 @@ namespace Saturn72.Extensions.Tests
             File.Delete(file);
             Thread.Sleep(500);
 
-            typeof(FileNotFoundException).ShouldBeThrownBy(() => Guard.FileExists(file));
             typeof(FileNotFoundException).ShouldBeThrownBy(() => Guard.FileExists(file), file);
+            const string msg = "Message";
+            typeof(FileNotFoundException).ShouldBeThrownBy(() => Guard.FileExists(file, msg), msg);
 
             var i = 100;
             Guard.FileExists(file, () => i = 10);
@@ -120,6 +121,48 @@ namespace Saturn72.Extensions.Tests
             }
         }
 
+        [Test]
+        public void DirectoryExists_Throws()
+        {
+            //create and delete file
+            var path = Path.GetTempFileName();
+            Thread.Sleep(500);
+            File.Delete(path);
+            Thread.Sleep(500);
+            
+            typeof(DirectoryNotFoundException).ShouldBeThrownBy(() => Guard.DirectoryExists(path), path);
+            const string msg = "Message";
+            typeof(DirectoryNotFoundException).ShouldBeThrownBy(() => Guard.DirectoryExists(path, msg), msg);
+
+            var i = 100;
+            Guard.DirectoryExists(path, () => i = 10);
+            i.ShouldEqual(10);
+        }
+
+        [Test]
+        public void DirectoryExists_NotThrowing()
+        {
+            //create and delete file
+            var path = Path.GetTempFileName();
+            Thread.Sleep(500);
+            File.Delete(path);
+            Thread.Sleep(500);
+            Directory.CreateDirectory(path);
+
+            try
+            {
+                Guard.DirectoryExists(path);
+                Guard.DirectoryExists(path, "message");
+
+                var i = 100;
+                Guard.DirectoryExists(path, () => i = 10);
+                i.ShouldEqual(100);
+            }
+            finally
+            {
+                Directory.Delete(path);
+            }
+        }
 
         public void ContainsKey_Throws()
         {
