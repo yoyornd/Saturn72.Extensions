@@ -30,6 +30,13 @@ namespace Saturn72.Extensions.Tests
         }
 
         [Test]
+        public void MustFollows_ThrowsWithMessage()
+        {
+            var message = "test";
+            typeof(Exception).ShouldBeThrownBy(() => Guard.MustFollow(() => message.Length == 0, message),
+                message);
+        }
+        [Test]
         public void NotEmpty_TriggersAction()
         {
             var x = 0;
@@ -58,6 +65,9 @@ namespace Saturn72.Extensions.Tests
         {
             typeof(ArgumentNullException).ShouldBeThrownBy(
                 () => Guard.HasValue("", () => { throw new ArgumentNullException(); }));
+
+            //with message
+            typeof(ArgumentException).ShouldBeThrownBy(() => Guard.HasValue("", "test"), "test\r\nParameter name: source");
         }
 
         [Test]
