@@ -48,11 +48,6 @@ namespace Saturn72.Extensions
             return string.Format(source, args);
         }
 
-        public static string AsFormat(this string source, IEnumerable<KeyValuePair<string, object>> args)
-        {
-            return source.AsFormat(args.ToArray());
-        }
-
         public static string AsFormat(this string source, IDictionary<string, object> args)
         {
             return source.AsFormat(args.ToArray());
