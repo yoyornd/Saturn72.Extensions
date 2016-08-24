@@ -50,11 +50,6 @@ namespace Saturn72.Extensions
 
         public static string AsFormat(this string source, IDictionary<string, object> args)
         {
-            return source.AsFormat(args.ToArray());
-        }
-
-        public static string AsFormat(this string source, params KeyValuePair<string, object>[] args)
-        {
             return args.Aggregate(source,
                 (current, keyValuePair) => current.Replace("{" + keyValuePair.Key + "}", keyValuePair.Value.ToString()));
         }
