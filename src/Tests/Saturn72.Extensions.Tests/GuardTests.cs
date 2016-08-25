@@ -36,6 +36,7 @@ namespace Saturn72.Extensions.Tests
             typeof(Exception).ShouldBeThrownBy(() => Guard.MustFollow(() => message.Length == 0, message),
                 message);
         }
+
         [Test]
         public void NotEmpty_TriggersAction()
         {
@@ -61,13 +62,23 @@ namespace Saturn72.Extensions.Tests
         }
 
         [Test]
+        public void HasValue_ThrowsOnNullString()
+        {
+            typeof(NullReferenceException).ShouldBeThrownBy(() => Guard.HasValue(default(string)));
+            //with message
+            const string msg = "exception Message";
+            typeof(NullReferenceException).ShouldBeThrownBy(() => Guard.HasValue(default(string), msg), msg);
+        }
+
+        [Test]
         public void HasValue_ThrowsExceptionOnEmptyString()
         {
             typeof(ArgumentNullException).ShouldBeThrownBy(
                 () => Guard.HasValue("", () => { throw new ArgumentNullException(); }));
 
             //with message
-            typeof(ArgumentException).ShouldBeThrownBy(() => Guard.HasValue("", "test"), "test\r\nParameter name: source");
+            typeof(ArgumentException).ShouldBeThrownBy(() => Guard.HasValue("", "test"),
+                "test\r\nParameter name: source");
         }
 
         [Test]
@@ -139,7 +150,7 @@ namespace Saturn72.Extensions.Tests
             Thread.Sleep(500);
             File.Delete(path);
             Thread.Sleep(500);
-            
+
             typeof(DirectoryNotFoundException).ShouldBeThrownBy(() => Guard.DirectoryExists(path), path);
             const string msg = "Message";
             typeof(DirectoryNotFoundException).ShouldBeThrownBy(() => Guard.DirectoryExists(path, msg), msg);

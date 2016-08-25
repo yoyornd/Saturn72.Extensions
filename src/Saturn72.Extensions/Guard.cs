@@ -71,7 +71,7 @@ namespace Saturn72.Extensions
 
         public static void HasValue(string source, string message)
         {
-            NotNull(source);
+            NotNull(source, message);
             MustFollow(source.HasValue,
                 () => { throw new ArgumentException(message, "source"); });
         }
