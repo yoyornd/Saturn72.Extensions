@@ -14,6 +14,122 @@ namespace Saturn72.Extensions.Tests
     public class GuardTests
     {
         [Test]
+        public void EqualsTo()
+        {
+            //not throwing
+            Guard.EqualsTo(1, 1);
+            Guard.EqualsTo(1, 1, "message");
+            var i = 100;
+            Guard.EqualsTo(1, 1, () => i++);
+            i.ShouldEqual(100);
+
+            //default behavior
+            typeof(InvalidOperationException).ShouldBeThrownBy(() => Guard.EqualsTo(10, 2));
+            //with message
+            var exceptionMEssage = "mesage";
+            typeof(InvalidOperationException).ShouldBeThrownBy(() => Guard.EqualsTo(10, 2, exceptionMEssage), exceptionMEssage);
+            //with custom action
+            Guard.EqualsTo(10, 2, () => i++);
+            i.ShouldEqual(101);
+
+        }
+
+        [Test]
+        public void GreaterThan()
+        {
+            //not throwing
+            Guard.GreaterThan(11, 2);
+            Guard.GreaterThan(11, 2, "message");
+            var i = 100;
+            Guard.GreaterThan(11, 2, ()=> i++);
+            i.ShouldEqual(100);
+
+            //default behavior
+            typeof(InvalidOperationException).ShouldBeThrownBy(()=>Guard.GreaterThan(1, 2));
+            //with message
+            var exceptionMEssage = "mesage";
+            typeof(InvalidOperationException).ShouldBeThrownBy(() => Guard.GreaterThan(1, 2, exceptionMEssage), exceptionMEssage);
+            //with custom action
+            Guard.GreaterThan(10, 23, () => i++);
+            i.ShouldEqual(101);
+
+        }
+        [Test]
+        public void GreaterThanOrEqualsTo()
+        {
+            //not throwing
+            Guard.GreaterThanOrEqualsTo(11, 2);
+            Guard.GreaterThanOrEqualsTo(2, 2);
+            Guard.GreaterThanOrEqualsTo(11, 2, "message");
+            Guard.GreaterThanOrEqualsTo(2, 2, "message");
+
+            var i = 100;
+            Guard.GreaterThanOrEqualsTo(11, 2, () => i++);
+            i.ShouldEqual(100);
+
+            Guard.GreaterThanOrEqualsTo(2, 2, () => i++);
+            i.ShouldEqual(100);
+
+            //default behavior
+            typeof(InvalidOperationException).ShouldBeThrownBy(() => Guard.GreaterThanOrEqualsTo(10, 20));
+
+            //with message
+            var exceptionMEssage = "mesage";
+            typeof(InvalidOperationException).ShouldBeThrownBy(() => Guard.GreaterThanOrEqualsTo(10, 23, exceptionMEssage), exceptionMEssage);
+            //with custom action
+            Guard.GreaterThan(10, 23, () => i++);
+            i.ShouldEqual(101);
+        }
+
+        [Test]
+        public void SmallerThan()
+        {
+            //not throwing
+            Guard.SmallerThan(1, 2);
+            Guard.SmallerThan(1, 2, "message");
+            var i = 100;
+            Guard.SmallerThan(1, 2, () => i++);
+            i.ShouldEqual(100);
+
+            //default behavior
+            typeof(InvalidOperationException).ShouldBeThrownBy(() => Guard.SmallerThan(10, 2));
+            //with message
+            var exceptionMEssage = "mesage";
+            typeof(InvalidOperationException).ShouldBeThrownBy(() => Guard.SmallerThan(10, 2, exceptionMEssage), exceptionMEssage);
+            //with custom action
+            Guard.SmallerThan(10, 2, () => i++);
+            i.ShouldEqual(101);
+
+        }
+
+        [Test]
+        public void SmallerThanOrEqualsTo()
+        {
+            //not throwing
+            Guard.SmallerThanOrEqualsTo(1, 2);
+            Guard.SmallerThanOrEqualsTo(2, 2);
+            Guard.SmallerThanOrEqualsTo(1, 2, "message");
+            Guard.SmallerThanOrEqualsTo(2, 2, "message");
+
+            var i = 100;
+            Guard.SmallerThanOrEqualsTo(1, 2, () => i++);
+            i.ShouldEqual(100);
+
+            Guard.SmallerThanOrEqualsTo(2, 2, () => i++);
+            i.ShouldEqual(100);
+
+            //default behavior
+            typeof(InvalidOperationException).ShouldBeThrownBy(() => Guard.SmallerThanOrEqualsTo(100, 20));
+
+            //with message
+            var exceptionMEssage = "mesage";
+            typeof(InvalidOperationException).ShouldBeThrownBy(() => Guard.SmallerThanOrEqualsTo(130, 23, exceptionMEssage), exceptionMEssage);
+            //with custom action
+            Guard.SmallerThan(150, 23, () => i++);
+            i.ShouldEqual(101);
+        }
+
+        [Test]
         public void MustFollows_DoesNotTriggerAction()
         {
             var str = "test";
