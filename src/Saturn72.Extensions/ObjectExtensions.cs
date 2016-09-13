@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 
 namespace Saturn72.Extensions
 {
@@ -31,6 +34,20 @@ namespace Saturn72.Extensions
                 result[pi.Name] = pi.GetValue(obj, null);
 
             return result;
+        }
+
+        public static MethodBase GetCallerMethodInfo(this object obj)
+        {
+            return GetStackTraceFrame(obj,1).GetMethod() as MethodBase;
+        }
+
+        public static StackFrame GetStackTraceFrame(this object o,int depth)
+        {
+            var stackTrace = new StackTrace();
+            if(depth>= stackTrace.FrameCount)
+                throw new ArgumentException(string.Format("Request dept is too deep {0}. Maximum depth is {1}", depth, stackTrace.FrameCount));
+
+            return stackTrace.GetFrame(depth);
         }
     }
 }
