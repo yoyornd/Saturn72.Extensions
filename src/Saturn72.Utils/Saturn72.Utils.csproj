@@ -41,6 +41,7 @@
     <Compile Include="HtmlUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionUtil.cs" />
+    <Compile Include="RuntimeUtil.cs" />
     <Compile Include="UriUtil.cs" />
     <Compile Include="WebDownloader.cs" />
   </ItemGroup>

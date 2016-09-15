@@ -1,8 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Reflection;
-using NUnit.Framework;
-using Saturn72.UnitTesting.Framework;
+﻿using NUnit.Framework;
 
 namespace Saturn72.Extensions.Tests
 {
@@ -31,46 +27,5 @@ namespace Saturn72.Extensions.Tests
         {
             Assert.True(default(object).IsDefault());
         }
-
-        
-        [Test]
-        public void ObjectExtensions_GetStackTraceFrame_Throws()
-        {
-            //On depth too deep
-            var currentFrameCount =  new StackTrace().FrameCount;
-            typeof(ArgumentException).ShouldBeThrownBy(()=>default(object).GetStackTraceFrame(currentFrameCount*2));
-
-            var o = new object();
-            typeof(ArgumentException).ShouldBeThrownBy(() => o.GetStackTraceFrame(currentFrameCount * 2));
-        }
-
-        [Test]
-        public void ObjectExtensions_GetStackTraceFrame()
-        {
-            var currentFrameCount = new StackTrace().FrameCount;
-            var res = default(object).GetStackTraceFrame(currentFrameCount /2);
-            res.ShouldNotBeNull();
-            res.ShouldBe<StackFrame>();
-
-             res = new object().GetStackTraceFrame(currentFrameCount/2);
-            res.ShouldNotBeNull();
-            res.ShouldBe<StackFrame>();
-        }
-
-
-
-        [Test]
-        public void ObjectExtensions_GetCallerMethod()
-        {
-            var res = default(object).GetCallerMethodInfo();
-            (res is MethodBase).ShouldBeTrue();
-            res.ShouldNotBeNull();
-
-            res = new object().GetCallerMethodInfo();
-            (res is MethodBase).ShouldBeTrue();
-            res.ShouldNotBeNull();
-        }
-
-
     }
 }

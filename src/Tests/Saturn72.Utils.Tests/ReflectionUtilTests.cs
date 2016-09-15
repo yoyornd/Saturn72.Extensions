@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using Saturn72.Extensions;
 using Saturn72.UnitTesting.Framework;
 
 namespace Saturn72.Extensions.Tests
