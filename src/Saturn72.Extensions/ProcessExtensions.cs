@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+
+#endregion
 
 namespace Saturn72.Extensions
 {
@@ -8,9 +12,12 @@ namespace Saturn72.Extensions
     {
         public static bool IsRunning(this Process process)
         {
+            if (process == null)
+                throw new NullReferenceException("process");
+
             try
             {
-                return Process.GetProcessById(process.Id).NotNull();
+                return Process.GetProcessById(process.Id) != null;
             }
             catch (InvalidOperationException)
             {
@@ -21,17 +28,8 @@ namespace Saturn72.Extensions
             return false;
         }
 
-        public static int WaitForExitAndReturnExitCode(this Process process, int timeout = 5000)
-        {
-            uint exitCode;
-            if (!GetExitCodeProcess(process.Handle, out exitCode))
-                throw new ExternalException("Process could not exit in give timeout.\nTimeout: {0}".AsFormat(timeout));
-
-            return (int) exitCode;
-        }
 
         public static string StartInfoAsString(this Process proc)
-
         {
             return AsString(proc.StartInfo);
         }
@@ -40,6 +38,15 @@ namespace Saturn72.Extensions
         {
             const string format = "File name: {0}\nArguments: {1}\nWorking directory: {2}";
             return string.Format(format, psi.FileName, psi.Arguments, psi.WorkingDirectory);
+        }
+
+        public static int WaitForExitAndReturnExitCode(this Process process, int timeout = 5000)
+        {
+            uint exitCode;
+            if (!GetExitCodeProcess(process.Handle, out exitCode))
+                throw new ExternalException("Process could not exit in give timeout.\nTimeout: {0}".AsFormat(timeout));
+
+            return (int) exitCode;
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]

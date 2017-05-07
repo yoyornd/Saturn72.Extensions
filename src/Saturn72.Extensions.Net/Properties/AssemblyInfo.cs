@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Saturn72.Extensions")]
+[assembly: AssemblyTitle("Saturn72.Extensions.Net")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Saturn Technologies (saturn72.com)")]
-[assembly: AssemblyProduct("Saturn72.Extensions")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Saturn72.Extensions.Net")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0ad4577f-6e25-4dbb-afad-8b5eb78dbe96")]
+[assembly: Guid("2601a20b-162d-4cd0-b6e3-4a467f5106c9")]
 
 // Version information for an assembly consists of the following four values:
 //

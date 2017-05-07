@@ -1,36 +1,39 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 
 namespace Saturn72.Extensions
 {
     public static class ObjectExtensions
     {
-        public static bool NotNull<T>(this T obj) where T : class
+        public static bool IsDefaultOrNull(this object obj)
         {
-            return !IsNull(obj);
+            return IsDefault(obj) || IsNull(obj);
         }
 
-        public static bool IsNull<T>(this T obj) where T : class
+        public static bool IsDefaultOrNull(this DateTime? obj)
         {
-            return obj == null;
+            return obj == default(DateTime) || obj ==null;
         }
 
-        public static bool IsDefault<T>(this T obj)
+        public static bool IsNull(this object o)
         {
-            return obj == null || obj.Equals(default(T));
+            return o == null;
         }
 
-        public static IDictionary<string, object> ToPropertyDictionary(this object obj)
+        public static bool NotNull(this object o)
         {
-            var result = new Dictionary<string, object>();
+            return !IsNull(o);
+        }
 
-            var pInfos = obj.GetType().GetProperties()
-                .Where(propertyInfo => propertyInfo.CanRead && propertyInfo.GetIndexParameters().Length == 0);
+        public static bool IsDefault<T>(this T o)
+        {
+            var d = default(T);
+            return (o == null && d == null)
+                   || o.Equals(d);
+        }
 
-            foreach (var pi in pInfos)
-                result[pi.Name] = pi.GetValue(obj, null);
-
-            return result;
+        public static bool NotDefault<T>(this T o)
+        {
+            return !IsDefault(o);
         }
     }
 }

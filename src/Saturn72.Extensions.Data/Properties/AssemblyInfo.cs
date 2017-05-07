@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Saturn72.Extensions.Data")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Saturn Technologies (saturn72.com)")]
 [assembly: AssemblyProduct("Saturn72.Extensions.Data")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d2a1b50b-9f66-4574-81b3-c486fceb9d03")]
+[assembly: Guid("1927098f-68eb-4038-90db-d28a3217cc23")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+
+#endregion
 
 namespace Saturn72.Extensions
 {
@@ -11,17 +15,11 @@ namespace Saturn72.Extensions
         {
             Uri uriResult;
             bool result = Uri.TryCreate(source, UriKind.Absolute, out uriResult)
-                && new[] { Uri.UriSchemeHttp, Uri.UriSchemeHttps, Uri.UriSchemeFile }.Contains(uriResult.Scheme);
+                          && new[] {Uri.UriSchemeHttp, Uri.UriSchemeHttps, Uri.UriSchemeFile}.Contains(uriResult.Scheme);
 
             return result;
         }
 
-        public static string RemoveNewLineEscape(this string str)
-        {
-            Guard.NotNull(str);
-
-            return str.Replace(Environment.NewLine, " ").Replace("\n", " ").RemoveDuplicateWhiteSpaces();
-        }
         public static bool EqualsTo(this string source, string compareTo, bool ignoreCases = true)
         {
             if (source == null && compareTo == null)
@@ -33,26 +31,6 @@ namespace Saturn72.Extensions
                 ? string.Equals(source, compareTo, StringComparison.OrdinalIgnoreCase)
                 : string.Equals(source, compareTo);
         }
-        public static bool EqualsTo(this string first, string[] stringArray)
-        {
-            return stringArray.All(s=> first.EqualsTo(s));
-        }
-
-        public static string RemoveDuplicateWhiteSpaces(this string source)
-        {
-            return Regex.Replace(source, @"\s{2,}", " ");
-        }
-
-        public static string AsFormat(this string source, params object[] args)
-        {
-            return string.Format(source, args);
-        }
-
-        public static string AsFormat(this string source, IDictionary<string, object> args)
-        {
-            return args.Aggregate(source,
-                (current, keyValuePair) => current.Replace("{" + keyValuePair.Key + "}", keyValuePair.Value.ToString()));
-        }
 
         public static bool HasValue(this string str)
         {
@@ -61,15 +39,95 @@ namespace Saturn72.Extensions
 
         public static string RemoveAllWhiteSpaces(this string str)
         {
-            return str.RemoveAll(" ");
+            return str.Replace(Environment.NewLine, " ").Replace("\n", " ").RemoveAllInstances(" ");
         }
 
-        public static string RemoveAll(this string str, string toRemove)
+        public static string RemoveDoubleWhiteSpaces(this string source)
+        {
+            return Regex.Replace(source, @"\s{2,}", " ");
+        }
+
+        public static string RemoveAllInstances(this string str, string toRemove)
         {
             return str.Replace(toRemove, string.Empty);
         }
 
-        public static int[] GetAllIndexes(this string str, char chr)
+        public static string RemoveAllInstances(this string str, params string[] toRemove)
+        {
+            return toRemove.Aggregate(str, RemoveAllInstances);
+        }
+
+        public static string AsFormat(this string source, params object[] args)
+        {
+            return string.Format(source, args);
+        }
+
+        public static string AsFormat(this string source, IEnumerable<KeyValuePair<string, object>> args)
+        {
+            return source.AsFormat(args.ToArray());
+        }
+
+        public static string AsFormat(this string source, IDictionary<string, object> args)
+        {
+            return source.AsFormat(args.ToArray());
+        }
+
+        public static string AsFormat(this string source, params KeyValuePair<string, object>[] args)
+        {
+            return args.Aggregate(source,
+                (current, keyValuePair) => current.Replace("{" + keyValuePair.Key + "}", keyValuePair.Value.ToString()));
+        }
+
+        /// <summary>
+        ///     RemoveAll the end of the string.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="fromIndex">Zero based from starting index</param>
+        /// <param name="toIndex">Zero based from end index</param>
+        /// <param name="replacementString"></param>
+        /// <returns>System_String</returns>
+        public static string Replace(this string str, int fromIndex, int toIndex, string replacementString)
+        {
+            //verifying out-of-bound
+            if (fromIndex > toIndex || fromIndex < 0 || fromIndex >= str.Length)
+                return str;
+
+            if (toIndex >= str.Length)
+                toIndex = str.Length;
+
+            var suffix = str.Substring(toIndex, str.Length - toIndex);
+            var prefix = str.Substring(0, fromIndex);
+
+            return prefix + replacementString + suffix;
+        }
+
+        /// <summary>
+        ///     Converts string to boolean.
+        /// </summary>
+        /// <param name="str">string to be parsed.</param>
+        /// <returns>bool. true only if the string value is "true", else false.</returns>
+        public static bool ToBoolean(this string str)
+        {
+            bool result;
+
+            bool.TryParse(str, out result);
+            return result;
+        }
+
+        /// <summary>
+        ///     Converts string to Int32.
+        /// </summary>
+        /// <param name="str">string to be parsed.</param>
+        /// <returns>int. If passed the string value, else 0</returns>
+        public static int ToInt32(this string str)
+        {
+            int result;
+
+            int.TryParse(str, out result);
+            return result;
+        }
+
+        public static int[] GetAllIndexesOf(this string str, char chr)
         {
             var result = new List<int>();
 
@@ -118,56 +176,6 @@ namespace Saturn72.Extensions
             return str.Replace(str.LastIndexOf(toReplace), str.Length, replacementString);
         }
 
-        /// <summary>
-        ///     RemoveAll the end of the string.
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="fromIndex">The last character index.</param>
-        /// <returns>System_String</returns>
-        public static string Replace(this string str, int fromIndex, int toIndex, string replacementString)
-        {
-            //verifying out-of-bound
-            if (fromIndex > toIndex || fromIndex < 0 || fromIndex >= str.Length)
-                return str;
-
-            if (toIndex > str.Length)
-                toIndex = str.Length;
-
-            return str.Substring(0, fromIndex) + replacementString + str.Substring(toIndex, str.Length - toIndex);
-        }
-
-        public static string RemoveAll(this string str, params string[] toRemove)
-        {
-            toRemove.ForEachItem(t => str = str.Replace(t, string.Empty));
-            return str;
-        }
-
-        /// <summary>
-        ///     Converts string to Int32.
-        /// </summary>
-        /// <param name="str">string to be parsed.</param>
-        /// <returns>int. If passed the string value, else 0</returns>
-        public static int ToInt32(this string str)
-        {
-            int result;
-
-            int.TryParse(str, out result);
-            return result;
-        }
-
-        /// <summary>
-        ///     Converts string to boolean.
-        /// </summary>
-        /// <param name="str">string to be parsed.</param>
-        /// <returns>bool. true only if the string value is "true", else false.</returns>
-        public static bool ToBoolean(this string str)
-        {
-            bool result;
-
-            bool.TryParse(str, out result);
-            return result;
-        }
-
         public static bool Contains(this string str, string subString, bool ignoreCase, RegExOption regExOption)
         {
             if (ignoreCase)
@@ -177,6 +185,7 @@ namespace Saturn72.Extensions
             }
             return Contains(str, subString, regExOption);
         }
+
         /// <summary>
         ///     checks if a sub string is contained in string.
         /// </summary>
@@ -208,6 +217,11 @@ namespace Saturn72.Extensions
                 default:
                     return false;
             }
+        }
+
+        public static string RemoveNewLineEscape(this string str)
+        {
+            return str.Replace(Environment.NewLine, " ").Replace("\n", " ").RemoveDoubleWhiteSpaces();
         }
     }
 }

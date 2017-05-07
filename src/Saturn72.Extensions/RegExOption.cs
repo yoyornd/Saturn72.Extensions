@@ -1,4 +1,4 @@
-﻿namespace Saturn72.Extensions
+namespace Saturn72.Extensions
 {
     public enum RegExOption
     {

@@ -1,12 +1,18 @@
-﻿using System;
+﻿
+using System;
+using System.Linq;
 
 namespace Saturn72.Extensions
 {
     public static class TypeExtensions
     {
-        public static object GetDefault(this Type type)
+        public static TValue GetAttributeValue<TAttribute, TValue>(this Type type,
+            Func<TAttribute, TValue> valueSelector) where TAttribute : Attribute
         {
-            return type.IsValueType ? Activator.CreateInstance(type) : null;
+            var att = type.GetCustomAttributes(
+                typeof (TAttribute), true
+                ).FirstOrDefault() as TAttribute;
+            return att != null ? valueSelector(att) : default(TValue);
         }
     }
 }
