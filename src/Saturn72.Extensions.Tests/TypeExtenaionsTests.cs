@@ -2,7 +2,7 @@
 
 using System;
 using NUnit.Framework;
-using Saturn72.UnitTesting.Framework;
+using Shouldly;
 
 #endregion
 
@@ -14,14 +14,14 @@ namespace Saturn72.Extensions.Tests
         public void GetAttributeValue_ReturnAttributesValue()
         {
             var value = typeof (MyClass1).GetAttributeValue((MyClassTestAttribute x) => x.Value);
-            value.ShouldEqual("value");
+            value.ShouldBe("value");
         }
 
         [Test]
         public void GetAttributeValue_ReturnsDefaultWhenAttributesNotExists()
         {
             var value = typeof (MyClass2).GetAttributeValue((MyClassTestAttribute x) => x.Value);
-            value.ShouldEqual(default(string));
+            value.ShouldBe(default(string));
         }
 
         [MyClassTest("value")]

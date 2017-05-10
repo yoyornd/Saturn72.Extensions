@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Saturn72.UnitTesting.Framework;
+using Shouldly;
 
 #endregion
 
@@ -15,8 +15,8 @@ namespace Saturn72.Extensions.Tests
         public void Guard_GreaterThan()
         {
             //throws on not greater than
-            typeof(ArgumentOutOfRangeException).ShouldBeThrownBy(()=> Guard.GreaterThan(1,1));
-            typeof(ArgumentOutOfRangeException).ShouldBeThrownBy(() => Guard.GreaterOrEqualTo(1, 10));
+            Should.Throw<ArgumentOutOfRangeException>(()=> Guard.GreaterThan(1,1));
+            Should.Throw<ArgumentOutOfRangeException>(() => Guard.GreaterOrEqualTo(1, 10));
 
             Guard.GreaterThan(1,0);
         }
@@ -25,7 +25,7 @@ namespace Saturn72.Extensions.Tests
         public void Guard_GreaterOrEqualsTo()
         {
             //throws on not greater than
-            typeof(ArgumentOutOfRangeException).ShouldBeThrownBy(() => Guard.GreaterOrEqualTo(1, 10));
+            Should.Throw<ArgumentOutOfRangeException>(() => Guard.GreaterOrEqualTo(1, 10));
 
             Guard.GreaterOrEqualTo(1, 1);
             Guard.GreaterOrEqualTo(1, 0);
@@ -34,8 +34,8 @@ namespace Saturn72.Extensions.Tests
         public void Guard_SmallerThan()
         {
             //throws on not greater than
-            typeof(ArgumentOutOfRangeException).ShouldBeThrownBy(() => Guard.SmallerThan(1, 1));
-            typeof(ArgumentOutOfRangeException).ShouldBeThrownBy(() => Guard.SmallerThan(1, 0));
+            Should.Throw<ArgumentOutOfRangeException>(() => Guard.SmallerThan(1, 1));
+            Should.Throw<ArgumentOutOfRangeException>(() => Guard.SmallerThan(1, 0));
 
             Guard.SmallerThan(1, 10);
         }
@@ -44,7 +44,7 @@ namespace Saturn72.Extensions.Tests
         public void Guard_SmallerOrEqualsTo()
         {
             //throws on not greater than
-            typeof(ArgumentOutOfRangeException).ShouldBeThrownBy(() => Guard.SmallerOrEqualTo(10, 1));
+            Should.Throw<ArgumentOutOfRangeException>(() => Guard.SmallerOrEqualTo(10, 1));
 
             Guard.SmallerOrEqualTo(1, 1);
             Guard.SmallerOrEqualTo(1, 10);
@@ -83,7 +83,7 @@ namespace Saturn72.Extensions.Tests
         {
             var str = "test";
             Guard.MustFollow(str.Length == 4, () => str = str.ToUpper());
-            "test".ShouldEqual(str);
+            "test".ShouldBe(str);
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace Saturn72.Extensions.Tests
         {
             var str = "test";
             Guard.MustFollow(() => str.Length == 0, () => str = str.ToUpper());
-            "TEST".ShouldEqual(str);
+            "TEST".ShouldBe(str);
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace Saturn72.Extensions.Tests
         {
             var x = 0;
             Guard.NotEmpty(new List<string>(), () => x++);
-            1.ShouldEqual(x);
+            1.ShouldBe(x);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace Saturn72.Extensions.Tests
         {
             var x = 0;
             Guard.HasValue("test", () => x++);
-            0.ShouldEqual(x);
+            0.ShouldBe(x);
         }
 
         [Test]
@@ -115,13 +115,13 @@ namespace Saturn72.Extensions.Tests
         {
             var x = 0;
             Guard.HasValue("", () => x++);
-            1.ShouldEqual(x);
+            1.ShouldBe(x);
         }
 
         [Test]
         public void HasValue_ThrowsExceptionOnEmptyString()
         {
-            typeof(ArgumentNullException).ShouldBeThrownBy(
+            Should.Throw<ArgumentNullException>(
                 () => Guard.HasValue("", () => { throw new ArgumentNullException(); }));
         }
 
@@ -134,7 +134,7 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void NotNull_ThrowsNullReferenceExceptionWithMessage()
         {
-            typeof(NullReferenceException).ShouldBeThrownBy(() => Guard.NotNull((object) null, "message"),
+            Should.Throw<NullReferenceException>(() => Guard.NotNull((object) null, "message"),
                 "message");
         }
 
@@ -143,7 +143,7 @@ namespace Saturn72.Extensions.Tests
         {
             var x = 0;
             Guard.NotNull((object) null, () => x++);
-            1.ShouldEqual(x);
+            1.ShouldBe(x);
         }
     }
 }

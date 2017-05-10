@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using NUnit.Framework;
-using Saturn72.UnitTesting.Framework;
+using Shouldly;
 
 #endregion
 
@@ -214,7 +214,7 @@ namespace Saturn72.Extensions.UT
             var result = FileSystemUtil.RelativePathToAbsolutePath(relativePath);
 
             var expectedPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
-            expectedPath.ShouldEqual(result);
+            expectedPath.ShouldBe(result);
         }
 
         [Test]
@@ -224,14 +224,14 @@ namespace Saturn72.Extensions.UT
             var result = FileSystemUtil.RelativePathToAbsolutePath(relativePath);
 
             var expectedPath = AppDomain.CurrentDomain.BaseDirectory;
-            expectedPath.ShouldEqual(result);
+            expectedPath.ShouldBe(result);
 
             
             relativePath = @"Relative\.\Path";
 
             result = FileSystemUtil.RelativePathToAbsolutePath(relativePath);
             expectedPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Relative\Path");
-            expectedPath.ShouldEqual(result);
+            expectedPath.ShouldBe(result);
         }
 
         [Test]

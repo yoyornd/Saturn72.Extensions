@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Saturn72.UnitTesting.Framework;
+using Shouldly;
 
 namespace Saturn72.Extensions.Tests
 {
@@ -13,10 +13,10 @@ namespace Saturn72.Extensions.Tests
         {
             var source = new Dictionary<string, string>();
             var actual = source.GetValueOrDefault("TTT");
-            actual.ShouldEqual(default(string));
+            actual.ShouldBe(default(string));
 
             actual = source.GetValueOrDefault("TTT", "d");
-            actual.ShouldEqual("d");
+            actual.ShouldBe("d");
         }
 
         [Test]
@@ -24,10 +24,10 @@ namespace Saturn72.Extensions.Tests
         {
             var source = new Dictionary<string, string>{{"TTT", "!"}};
             var actual = source.GetValueOrDefault("TTT");
-            actual.ShouldEqual("!");
+            actual.ShouldBe("!");
 
             actual = source.GetValueOrDefault("TTT", "d");
-            actual.ShouldEqual("!");
+            actual.ShouldBe("!");
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace Saturn72.Extensions.Tests
             };
 
             var actual = source.GetValueOrSet("key1", "newValue1");
-            actual.ShouldEqual(value1);
+            actual.ShouldBe(value1);
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace Saturn72.Extensions.Tests
 
             const string value3 = "value3";
             var actual = source.GetValueOrSet("key3", value3);
-            actual.ShouldEqual(value3);
+            actual.ShouldBe(value3);
         }
 
         [Test]

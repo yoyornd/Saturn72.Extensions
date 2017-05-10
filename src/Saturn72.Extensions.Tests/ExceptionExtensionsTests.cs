@@ -3,7 +3,7 @@
 using System;
 using Moq;
 using NUnit.Framework;
-using Saturn72.UnitTesting.Framework;
+using Shouldly;
 
 #endregion
 
@@ -14,7 +14,7 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void AsString_throws()
         {
-            typeof(NullReferenceException).ShouldBeThrownBy(() => ((Exception) null).AsString());
+            Should.Throw<NullReferenceException>(() => ((Exception) null).AsString());
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace Saturn72.Extensions.Tests
 
             var newLine = Environment.NewLine;
             var expectedMsg = msg + "\n" + toString + newLine + stackTrace;
-            ex.Object.AsString().ShouldEqual(expectedMsg);
+            ex.Object.AsString().ShouldBe(expectedMsg);
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace Saturn72.Extensions.Tests
             var ex = new Exception(msg, internalEx.Object);
             var newLine = Environment.NewLine;
             var expectedMsg = msg + "\n" + ex + newLine + ieMsg + "\n" + ieToString + newLine;
-            ex.AsString().ShouldEqual(expectedMsg);
+            ex.AsString().ShouldBe(expectedMsg);
         }
     }
 }

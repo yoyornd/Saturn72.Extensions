@@ -4,7 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using NUnit.Framework;
-using Saturn72.UnitTesting.Framework;
+using Shouldly;
 
 #endregion
 
@@ -15,7 +15,7 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void IsRunning_ThrowsExceptionOnNullProcess()
         {
-            typeof(NullReferenceException).ShouldBeThrownBy(() => ((Process) null).IsRunning());
+            Should.Throw<NullReferenceException>(() => ((Process) null).IsRunning());
            
         }
 
@@ -40,14 +40,14 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void StartInfoAsString_Throws()
         {
-            typeof(NullReferenceException).ShouldBeThrownBy(() => ((Process) null).StartInfoAsString());
+            Should.Throw<NullReferenceException>(() => ((Process) null).StartInfoAsString());
         }
 
 
         [Test]
         public void AsString_Throws()
         {
-            typeof(NullReferenceException).ShouldBeThrownBy(() => ((ProcessStartInfo) null).AsString());
+            Should.Throw<NullReferenceException>(() => ((ProcessStartInfo) null).AsString());
         }
 
 
@@ -63,14 +63,14 @@ namespace Saturn72.Extensions.Tests
 
             var proc = new Process { StartInfo = psi };
 
-            proc.StartInfoAsString().ShouldEqual("File name: notepad++.exe\nArguments: C:\\temp\\1.bat\nWorking directory: C:\\Program Files (x86)\\Notepad++");
+            proc.StartInfoAsString().ShouldBe("File name: notepad++.exe\nArguments: C:\\temp\\1.bat\nWorking directory: C:\\Program Files (x86)\\Notepad++");
         }
         [Test]
         public void StartInfoAsString_ReturnsStringWithEmptyValues()
         {
             var proc = new Process();
 
-            proc.StartInfoAsString().ShouldEqual("File name: \nArguments: \nWorking directory: ");
+            proc.StartInfoAsString().ShouldBe("File name: \nArguments: \nWorking directory: ");
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace Saturn72.Extensions.Tests
                 Arguments = @"C:\temp\1.bat"
             };
 
-            psi.AsString().ShouldEqual("File name: notepad++.exe\nArguments: C:\\temp\\1.bat\nWorking directory: C:\\Program Files (x86)\\Notepad++");
+            psi.AsString().ShouldBe("File name: notepad++.exe\nArguments: C:\\temp\\1.bat\nWorking directory: C:\\Program Files (x86)\\Notepad++");
         }
     }
 }
