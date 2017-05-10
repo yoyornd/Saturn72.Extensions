@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Saturn72.UnitTesting.Framework;
+using Shouldly;
 
 #endregion
 
@@ -33,39 +33,39 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void RemoveSubStringInstances_removes_all()
         {
-            "AACC".ShouldEqual("AAbbCC".RemoveAllInstances("bb"));
-            "AbCC".ShouldEqual("AAbbCC".RemoveAllInstances("Ab"));
-            "bbCC".ShouldEqual("AAbbCC".RemoveAllInstances("AA"));
+            "AACC".ShouldBe("AAbbCC".RemoveAllInstances("bb"));
+            "AbCC".ShouldBe("AAbbCC".RemoveAllInstances("Ab"));
+            "bbCC".ShouldBe("AAbbCC".RemoveAllInstances("AA"));
         }
 
         [Test]
         public void RemoveSubStringInstances_removesnothing()
         {
-            "AbbACC".ShouldEqual("AbbACC".RemoveAllInstances("AA"));
+            "AbbACC".ShouldBe("AbbACC".RemoveAllInstances("AA"));
         }
 
         [Test]
         public void RemoveAll_RemovesAllInstances1()
         {
-            "aaaBBBbbbCc".ShouldEqual("AAAaaaBBBbbbCc".RemoveAllInstances("A"));
+            "aaaBBBbbbCc".ShouldBe("AAAaaaBBBbbbCc".RemoveAllInstances("A"));
         }
 
         [Test]
         public void RemoveAll_RemovesAllInstances2()
         {
-            "aaaBc".ShouldEqual("AAAaaaBBBbbbCc".RemoveAllInstances("A", "BB", "bbb", "C"));
+            "aaaBc".ShouldBe("AAAaaaBBBbbbCc".RemoveAllInstances("A", "BB", "bbb", "C"));
         }
 
         [Test]
         public void RemoveAllWhiteSpaces()
         {
-            "A".ShouldEqual("    A               ".RemoveAllWhiteSpaces());
+            "A".ShouldBe("    A               ".RemoveAllWhiteSpaces());
         }
 
         [Test]
         public void AsFormat_empty()
         {
-            "    _logic".ShouldEqual("    {0}".AsFormat("_logic"));
+            "    _logic".ShouldBe("    {0}".AsFormat("_logic"));
         }
 
         [Test]
@@ -78,13 +78,13 @@ namespace Saturn72.Extensions.Tests
         public void AsFormat_string_and_object()
         {
             var o = new object();
-            "test_logic".ShouldEqual("test{0}".AsFormat("_logic", o));
+            "test_logic".ShouldBe("test{0}".AsFormat("_logic", o));
         }
 
         [Test]
         public void AsFormat_strings()
         {
-            "test_logic".ShouldEqual("test{0}".AsFormat("_logic"));
+            "test_logic".ShouldBe("test{0}".AsFormat("_logic"));
         }
 
         [Test]
@@ -103,22 +103,22 @@ namespace Saturn72.Extensions.Tests
                 {"t3", new object()}
             };
 
-            "TTT 2 System.Object".ShouldEqual("{t1} {t2} {t3}".AsFormat(formatDictionary));
+            "TTT 2 System.Object".ShouldBe("{t1} {t2} {t3}".AsFormat(formatDictionary));
         }
 
         [Test]
         public void Replace_CheckOutOfBoundIndexes()
         {
-            "source".Replace(-1, 100, "ddd").ShouldEqual("source");
-            "source".Replace(100, 1, "ddd").ShouldEqual("source");
-            "source".Replace(2, 100, "ddd").ShouldEqual("soddd");
+            "source".Replace(-1, 100, "ddd").ShouldBe("source");
+            "source".Replace(100, 1, "ddd").ShouldBe("source");
+            "source".Replace(2, 100, "ddd").ShouldBe("soddd");
         }
 
         [Test]
         public void Replace_Replaces()
         {
-            "source".Replace(2, 4, "ddd").ShouldEqual("sodddce");
-            "source".Replace(4, 4, "ddd").ShouldEqual("sourdddce");
+            "source".Replace(2, 4, "ddd").ShouldBe("sodddce");
+            "source".Replace(4, 4, "ddd").ShouldBe("sourdddce");
         }
 
         [Test]

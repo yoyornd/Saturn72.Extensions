@@ -2,7 +2,7 @@
 using System.Xml;
 using System.Xml.Linq;
 using NUnit.Framework;
-using Saturn72.UnitTesting.Framework;
+using Shouldly;
 
 namespace Saturn72.Extensions.Data.Tests
 {
@@ -22,13 +22,13 @@ namespace Saturn72.Extensions.Data.Tests
             var xmlNode = doc.CreateNode("element", "pages", "");
             xmlNode.InnerText = "290";
             var attName = "att";
-            typeof(NullReferenceException).ShouldBeThrownBy(() => xmlNode.GetAttributeValue(attName));
+            Should.Throw<NullReferenceException>(() => xmlNode.GetAttributeValue(attName));
 
             var attValue = "val";
             var xmlAtt = doc.CreateAttribute(attName);
             xmlAtt.Value = attValue;
             xmlNode.Attributes.Append(xmlAtt);
-            xmlNode.GetAttributeValue(attName).ShouldEqual(attValue);
+            xmlNode.GetAttributeValue(attName).ShouldBe(attValue);
         }
 
         [Test]
@@ -46,13 +46,13 @@ namespace Saturn72.Extensions.Data.Tests
             // Create a new element node.
             var xmlNode = doc.CreateNode("element", "pages", "");
             xmlNode.InnerText = "290";
-            xmlNode.GetAttributeValueOrDefault(attName).ShouldEqual(null);
+            xmlNode.GetAttributeValueOrDefault(attName).ShouldBe(null);
 
             var attValue = "val";
             var xmlAtt = doc.CreateAttribute(attName);
             xmlAtt.Value = attValue;
             xmlNode.Attributes.Append(xmlAtt);
-            xmlNode.GetAttributeValueOrDefault(attName).ShouldEqual(attValue);
+            xmlNode.GetAttributeValueOrDefault(attName).ShouldBe(attValue);
         }
 
         [Test]
@@ -61,12 +61,12 @@ namespace Saturn72.Extensions.Data.Tests
             var xElem1 = new XElement("Child2", "1");
 
             var attName = "att";
-            typeof(NullReferenceException).ShouldBeThrownBy(() => xElem1.GetAttributeValue(attName));
+            Should.Throw<NullReferenceException>(() => xElem1.GetAttributeValue(attName));
 
             var attValue = "val";
             var xAtt = new XAttribute(attName, attValue);
             var xElem2 = new XElement("child2", xAtt);
-            xElem2.GetAttributeValue(attName).ShouldEqual(attValue);
+            xElem2.GetAttributeValue(attName).ShouldBe(attValue);
         }
 
         [Test]
@@ -75,12 +75,12 @@ namespace Saturn72.Extensions.Data.Tests
             var attName = "att";
 
             var xElem1 = new XElement("Child2", "1");
-            xElem1.GetAttributeValueOrDefault(attName).ShouldEqual(null);
+            xElem1.GetAttributeValueOrDefault(attName).ShouldBe(null);
 
             var attValue = "val";
             var xAtt = new XAttribute(attName, attValue);
             var xElem2 = new XElement("child2", xAtt);
-            xElem2.GetAttributeValueOrDefault(attName).ShouldEqual(attValue);
+            xElem2.GetAttributeValueOrDefault(attName).ShouldBe(attValue);
         }
 
         [Test]
@@ -90,17 +90,17 @@ namespace Saturn72.Extensions.Data.Tests
             var innerElemValue = "innerElemValue";
 
             //throws On Null source element
-            typeof(NullReferenceException).ShouldBeThrownBy(() => ((XElement)null).GetInnerElementValue(innerElemName));
+            Should.Throw<NullReferenceException>(() => ((XElement)null).GetInnerElementValue(innerElemName));
 
             //throws On Null inner Element
             var rootElem1 = new XElement("Root", "innerValue");
-            typeof(NullReferenceException).ShouldBeThrownBy(() => rootElem1.GetInnerElementValue(innerElemName));
+            Should.Throw<NullReferenceException>(() => rootElem1.GetInnerElementValue(innerElemName));
 
 
             var innerElem = new XElement(innerElemName, innerElemValue);
             var rootElem = new XElement("Root", innerElem);
 
-            rootElem.GetInnerElementValue(innerElemName).ShouldEqual(innerElemValue);
+            rootElem.GetInnerElementValue(innerElemName).ShouldBe(innerElemValue);
         }
 
         [Test]
@@ -113,13 +113,13 @@ namespace Saturn72.Extensions.Data.Tests
                         "  <price>5.95</price>" +
                         "</book>");
             //throws On Null source element
-            typeof(NullReferenceException).ShouldBeThrownBy(() => ((XmlNode)null).GetInnerElementValue("DDD"));
+            Should.Throw<NullReferenceException>(() => ((XmlNode)null).GetInnerElementValue("DDD"));
 
             //throws On Null inner Element
             var xmlNode = doc.SelectSingleNode("book");
-            typeof(NullReferenceException).ShouldBeThrownBy(() => xmlNode.GetInnerElementValue("CCC"));
+            Should.Throw<NullReferenceException>(() => xmlNode.GetInnerElementValue("CCC"));
 
-            xmlNode.GetInnerElementValue("price").ShouldEqual("5.95");
+            xmlNode.GetInnerElementValue("price").ShouldBe("5.95");
         }
     }
 }
