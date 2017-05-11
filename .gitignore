@@ -30,6 +30,7 @@ _ReSharper*/
 [Pp]ackages
 *.sou
 
-
+.vs/
+.nuget/
 #exclude patterns
 !**/*.Tests/Resources/*
