@@ -62,7 +62,7 @@ namespace Saturn72.Extensions.Tests
         [Test]
         public void GetOrDefault_ThrowOnNull()
         {
-            Assert.Throws<NullReferenceException>(
+            Should.Throw<NullReferenceException>(
                 () => ((Dictionary<object, object>)null).GetValueOrDefault(new object()));
         }
 
@@ -77,7 +77,7 @@ namespace Saturn72.Extensions.Tests
             { refKey1, refValue1}
             };
 
-            Assert.AreEqual(default(TestValueObject), valueTypeSource.GetValueOrDefault(new TestKeyObject()));
+            valueTypeSource.GetValueOrDefault(new TestKeyObject()).ShouldBe(default(TestValueObject));
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace Saturn72.Extensions.Tests
             { refKey1, refValue1}
         };
 
-            Assert.AreEqual(refValue1, valueTypeSource.GetValueOrDefault(refKey1));
+             valueTypeSource.GetValueOrDefault(refKey1).ShouldBe(refValue1);
         }
 
         public class TestKeyObject
@@ -110,7 +110,7 @@ namespace Saturn72.Extensions.Tests
             { "1", 1 },
             {"2", 2 }
             };
-            Assert.AreEqual(0, valueTypeSource.GetValueOrDefault("key"));
+            valueTypeSource.GetValueOrDefault("key").ShouldBe(0);
         }
 
         [Test]
@@ -121,7 +121,7 @@ namespace Saturn72.Extensions.Tests
             { "1", 1 },
             {"2", 2 }
             };
-            Assert.AreEqual(2, valueTypeSource.GetValueOrDefault("2"));
+            valueTypeSource.GetValueOrDefault("2").ShouldBe(2);
         }
     }
 }

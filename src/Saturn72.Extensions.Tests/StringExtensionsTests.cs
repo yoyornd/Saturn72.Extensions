@@ -183,7 +183,7 @@ namespace Saturn72.Extensions.Tests
         public void RemoveNewLineEscape_ClearsNewLinesEscapes()
         {
             var source = "This\n is\nsource\n";
-            Assert.AreEqual("This is source ", source.RemoveNewLineEscape());
+            source.RemoveNewLineEscape().ShouldBe("This is source ");
 
         }
 
@@ -192,38 +192,38 @@ namespace Saturn72.Extensions.Tests
         {
             var source = "This is source";
 
-            Assert.AreEqual("This is source", source.RemoveNewLineEscape());
+            source.RemoveNewLineEscape().ShouldBe("This is source");
         }
 
         [Test]
         public void IsUrl_returnsTrueOnHttpUrl()
         {
-            Assert.True("https://www.test.com".IsUrl());
+            "https://www.test.com".IsUrl().ShouldBeTrue();
         }
 
         [Test]
         public void IsUrl_returnsTrueOnHttpsUrl()
         {
-            Assert.True("http://www.test.com".IsUrl());
+            "http://www.test.com".IsUrl().ShouldBeTrue();
         }
 
         [Test]
         public void IsUrl_returnsTrueOnFileSystemUrlUrl()
         {
-            Assert.True("file:///c:/WINDOWS/clock.avi".IsUrl());
+            "file:///c:/WINDOWS/clock.avi".IsUrl().ShouldBeTrue();
         }
 
         [Test]
         public void IsUrl_ReturnsFalseOnEmptyString()
         {
-            Assert.False("".IsUrl());
-            Assert.False(((string)null).IsUrl());
+            "".IsUrl().ShouldBeFalse();
+            ((string)null).IsUrl().ShouldBeFalse();
         }
 
         [Test]
         public void IsUrl_ReturnsFalseOnIllegalUrl()
         {
-            Assert.False("This is not url".IsUrl());
+            "This is not url".IsUrl().ShouldBeFalse();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Saturn72.Extensions.Tests
         {
             var i = 0;
             new[] {1, 2, 3}.ForEachItem(c => i++);
-            Assert.AreEqual(3, i);
+            i.ShouldBe(3);
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Saturn72.Extensions.Tests
             {
                 var source = new[] { 1, 2 };
                 var actualValue = source.Random();
-                Assert.IsTrue(1 == actualValue || 2 == actualValue);
+                (1 == actualValue || 2 == actualValue).ShouldBeTrue();
 
             });
 

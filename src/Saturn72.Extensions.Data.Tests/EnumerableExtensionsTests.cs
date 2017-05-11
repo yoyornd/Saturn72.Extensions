@@ -34,14 +34,14 @@ namespace Saturn72.Extensions.Data.Tests
             };
 
             var result = entities.ToDataTable();
-            Assert.AreEqual(result.Rows.Count, 11);
+            result.Rows.Count.ShouldBe(11);
             for (var i = 1; i <= 11; i++)
             {
                 var row = result.Rows[i - 1];
-                Assert.AreEqual(row["Id"],i);
-                Assert.AreEqual(row["Key"],"key" + i);
-                Assert.AreEqual(row["Value"],"value" + i);
-                Assert.AreEqual(row["ForeignKey"],i%3 == 0 ? 3 : i%3);
+                row["Id"].ShouldBe(i);
+                row["Key"].ShouldBe("key" + i);
+                row["Value"].ShouldBe("value" + i);
+                row["ForeignKey"].ShouldBe(i %3 == 0 ? 3 : i%3);
             }
         }
     }

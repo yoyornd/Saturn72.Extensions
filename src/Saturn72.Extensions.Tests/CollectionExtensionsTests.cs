@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 
 #endregion
 
@@ -19,7 +20,7 @@ namespace Saturn72.Extensions.Tests
             source.AddIfNotExist(3);
 
             var all = source.Where(x => x == 3);
-            Assert.AreEqual(1, all.Count());
+            all.Count().ShouldBe(1);
         }
 
         [Test]
@@ -28,8 +29,7 @@ namespace Saturn72.Extensions.Tests
         {
             var source = new List<int> {1, 2, 3};
             source.AddIfNotExist(4);
-
-            Assert.Contains(4, source);
+            source.ShouldContain(4);
         }
 
 
@@ -37,8 +37,7 @@ namespace Saturn72.Extensions.Tests
         public
         void AddIfNotExists_ThrowsOnNullItemToAdd()
         {
-            Assert.Throws<NullReferenceException>
-                (() => (null as IList<object>)
+            Should.Throw<NullReferenceException>(() => (null as IList<object>)
                 .AddIfNotExist(new object()));
         }
     }
