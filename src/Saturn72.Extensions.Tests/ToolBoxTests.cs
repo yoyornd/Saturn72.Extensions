@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 #endregion
 
-namespace Saturn72.Extensions.UT
+namespace Saturn72.Extensions.Tests
 {
     public class ToolBoxTests
     {
