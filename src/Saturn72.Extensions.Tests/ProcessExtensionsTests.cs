@@ -37,9 +37,9 @@ namespace Saturn72.Extensions.Tests
              var exe = Path.Combine(Path.GetDirectoryName(path),"Resources\\SimpleApp.exe");
 
             var proc = Process.Start(exe);
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
             proc.CloseMainWindow();
-            Thread.Sleep(1000);
+            Thread.Sleep(3000);
             proc.IsRunning().ShouldBeFalse();
         }
 
