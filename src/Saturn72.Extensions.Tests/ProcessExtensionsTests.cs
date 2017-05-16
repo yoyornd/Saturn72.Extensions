@@ -34,7 +34,7 @@ namespace Saturn72.Extensions.Tests
             new Process().IsRunning().ShouldBeFalse();
             var codeBase = Assembly.GetExecutingAssembly().CodeBase;
             string path = Uri.UnescapeDataString(new UriBuilder(codeBase).Path);
-             var exe = Path.Combine(Path.GetDirectoryName(path),"Resources\\SimpleApp");
+             var exe = Path.Combine(Path.GetDirectoryName(path),"Resources\\SimpleApp.exe");
 
             var proc = Process.Start(exe);
             Thread.Sleep(2000);

@@ -33,4 +33,5 @@ _ReSharper*/
 .vs/
 .nuget/
 #exclude patterns
-!**/*.Tests/Resources/*
+!**/*.Tests/Resources/*.*
+!**/SimpleApp.exe
