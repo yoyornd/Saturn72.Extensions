@@ -2,6 +2,8 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Threading;
 using NUnit.Framework;
 using Shouldly;
@@ -30,10 +32,14 @@ namespace Saturn72.Extensions.Tests
         public void IsRunning_ReturnsFalseOnNotRunningProcess()
         {
             new Process().IsRunning().ShouldBeFalse();
-            var proc = Process.Start("notepad");
-            Thread.Sleep(3000);
+            var codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            string path = Uri.UnescapeDataString(new UriBuilder(codeBase).Path);
+             var exe = Path.Combine(Path.GetDirectoryName(path),"Resources\\SimpleApp");
+
+            var proc = Process.Start(exe);
+            Thread.Sleep(2000);
             proc.CloseMainWindow();
-            Thread.Sleep(3000);
+            Thread.Sleep(1000);
             proc.IsRunning().ShouldBeFalse();
         }
 
