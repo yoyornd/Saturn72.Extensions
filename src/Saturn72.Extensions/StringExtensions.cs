@@ -42,9 +42,10 @@ namespace Saturn72.Extensions
             return str.Replace(Environment.NewLine, " ").Replace("\n", " ").RemoveAllInstances(" ");
         }
 
-        public static string RemoveDoubleWhiteSpaces(this string source)
+        public static string RemoveDuplicateWhiteSpaces(this string source, bool includeAnyWhiteSpaceEscape = false)
         {
-            return Regex.Replace(source, @"\s{2,}", " ");
+            var pattern = includeAnyWhiteSpaceEscape?@"\s{2,}":"[ ]{2,}";
+            return Regex.Replace(source, pattern, " ");
         }
 
         public static string RemoveAllInstances(this string str, string toRemove)
@@ -221,7 +222,7 @@ namespace Saturn72.Extensions
 
         public static string RemoveNewLineEscape(this string str)
         {
-            return str.Replace(Environment.NewLine, " ").Replace("\n", " ").RemoveDoubleWhiteSpaces();
+            return str.Replace(Environment.NewLine, " ").Replace("\n", " ").RemoveDuplicateWhiteSpaces();
         }
     }
 }

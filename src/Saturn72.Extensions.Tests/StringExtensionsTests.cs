@@ -12,6 +12,16 @@ namespace Saturn72.Extensions.Tests
     public class StringExtensionsTests
     {
         [Test]
+        public void StringExtensions_RemoveDoubleWhiteSpaces()
+        {
+            "   ".RemoveDuplicateWhiteSpaces().ShouldBe(" ");
+            "  a b  c   ".RemoveDuplicateWhiteSpaces().ShouldBe(" a b c ");
+            "  \n   ".RemoveDuplicateWhiteSpaces().ShouldBe(" \n ");
+
+            "  \n   ".RemoveDuplicateWhiteSpaces(true).ShouldBe(" ");
+        }
+
+        [Test]
         public void HasValue_null()
         {
             string source = null;
