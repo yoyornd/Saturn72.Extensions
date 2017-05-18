@@ -224,5 +224,9 @@ namespace Saturn72.Extensions
         {
             return str.Replace(Environment.NewLine, " ").Replace("\n", " ").RemoveDuplicateWhiteSpaces();
         }
+        public static string StripHtmlMarkups(this string source)
+        {
+            return Regex.Replace(Regex.Replace(source, @"<[^>]+>|&nbsp;", "").Trim(), @"\s{2,}", " ");
+        }
     }
 }
