@@ -4,6 +4,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading;
 using NUnit.Framework;
 using Shouldly;
@@ -247,5 +248,58 @@ namespace Saturn72.Extensions.Tests
 
             Directory.Delete(path);
         }
+
+        [Test]
+        public void FileSystemUtil_MoveFile_MovesFile_Fails_SourceFileNotExists()
+        {
+            var source = Path.GetTempFileName();
+            var dest = "somestring";
+            File.Delete(source);
+
+            Should.Throw<FileNotFoundException>(()=> FileSystemUtil.MoveFile(source, dest));
+            File.Exists(source).ShouldBeFalse();
+        }
+
+        [Test]
+        public void FileSystemUtil_MoveFile_MovesFile_Fails_DestIsNotFileName()
+        {
+            var source = Path.GetTempFileName();
+            var temp = Path.GetTempFileName();
+            var dest = temp.Replace(".", "");
+            Should.Throw<IOException>(() => FileSystemUtil.MoveFile(source, dest));
+            File.Exists(source).ShouldBeTrue();
+            File.Delete(source);
+            File.Exists(dest).ShouldBeFalse();
+            File.Delete(temp);
+        }
+
+
+
+        [Test]
+        public void FileSystemUtil_MoveFile_MovesFile_Success_DestFileExists()
+        {
+            var source = Path.GetTempFileName();
+            var dest = Path.GetTempFileName();
+            Should.NotThrow(() => FileSystemUtil.MoveFile(source, dest));
+            File.Exists(source).ShouldBeFalse();
+            File.Delete(source);
+            File.Exists(dest).ShouldBeTrue();
+            File.Delete(dest);
+        }
+
+        [Test]
+        public void FileSystemUtil_MoveFile_MovesFile_Success()
+        {
+            var source = Path.GetTempFileName();
+            var dest = Path.GetTempFileName();
+            File.Delete(dest);
+
+            Should.NotThrow(() => FileSystemUtil.MoveFile(source, dest));
+            File.Exists(source).ShouldBeFalse();
+            File.Delete(source);
+            File.Exists(dest).ShouldBeTrue();
+            File.Delete(dest);
+        }
+
     }
 }

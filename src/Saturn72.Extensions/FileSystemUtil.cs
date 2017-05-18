@@ -155,6 +155,28 @@ namespace Saturn72.Extensions
 
             Directory.CreateDirectory(path);
         }
+        public static void MoveFile(string sourceFilePath, string destinationFilePath)
+        {
+            Guard.HasValue(sourceFilePath);
+            Guard.HasValue(destinationFilePath);
+            Guard.FileExists(sourceFilePath);
 
+            var temp = Path.GetTempFileName();
+
+            try
+            {
+                if (FileExists(destinationFilePath))
+                {
+                    File.Delete(temp);
+                    File.Move(destinationFilePath, temp);
+                }
+                File.Move(sourceFilePath, destinationFilePath);
+            }
+            catch (Exception ex)
+            {
+                File.Move(temp, destinationFilePath);
+                throw ex;
+            }
+        }
     }
 }
