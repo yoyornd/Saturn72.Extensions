@@ -31,7 +31,36 @@ namespace Saturn72.Extensions.Tests
         }
 
         [Test]
-        public void GetValueOrSet_ReturnsExistValue()
+        public void GetValueOrSet_Func_ReturnsExistValue()
+        {
+            const string value1 = "value1";
+
+            var source = new Dictionary<string, string>
+            {
+                {"key1", value1},
+                {"key2", "value2"},
+            };
+
+            var actual = source.GetValueOrSet("key1", ()=> "newValue1");
+            actual.ShouldBe(value1);
+        }
+
+        [Test]
+        public void GetValueOrSet_Func_ReturnsSetValue()
+        {
+            var source = new Dictionary<string, string>
+            {
+                {"key1", "value1"},
+                {"key2", "value2"},
+            };
+
+            const string value3 = "value3";
+            var actual = source.GetValueOrSet("key3", ()=> value3);
+            actual.ShouldBe(value3);
+        }
+
+        [Test]
+        public void GetValueOrSet_Simple_ReturnsExistValue()
         {
             const string value1 = "value1";
 
@@ -46,7 +75,7 @@ namespace Saturn72.Extensions.Tests
         }
 
         [Test]
-        public void GetValueOrSet_ReturnsSetValue()
+        public void GetValueOrSet_Simple_ReturnsSetValue()
         {
             var source = new Dictionary<string, string>
             {

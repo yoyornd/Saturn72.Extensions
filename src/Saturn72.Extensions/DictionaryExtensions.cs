@@ -1,6 +1,8 @@
 ﻿#region
 
+using System;
 using System.Collections.Generic;
+using System.Web.ModelBinding;
 
 #endregion
 
@@ -23,13 +25,17 @@ namespace Saturn72.Extensions
         }
 
         public static TValue GetValueOrSet<TKey, TValue>(this IDictionary<TKey, TValue> source, TKey key,
-            TValue setValue)
+            Func<TValue> expression)
         {
             TValue tmp;
             if (source.TryGetValue(key, out tmp))
                 return tmp;
-            source[key] = setValue;
-            return setValue;
+            return (source[key] = expression());
+        }
+        public static TValue GetValueOrSet<TKey, TValue>(this IDictionary<TKey, TValue> source, TKey key,
+            TValue setValue)
+        {
+            return GetValueOrSet(source, key, () => setValue);
         }
     }
 }
