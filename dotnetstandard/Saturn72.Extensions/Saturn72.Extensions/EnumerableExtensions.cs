@@ -1,10 +1,9 @@
-﻿#region
+#region
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 #endregion
 
@@ -42,13 +41,12 @@ namespace Saturn72.Extensions
 
         public static bool IsIEnumerableofType(this Type type)
         {
-            var typeInfo = type.GetTypeInfo();
-
-            var genArgs = typeInfo.GenericTypeArguments;
-            if (genArgs.Length == 1 && typeof(IEnumerable<>).MakeGenericType(genArgs).GetTypeInfo().IsAssignableFrom(typeInfo))
+            var genArgs = type.GetGenericArguments();
+            if (genArgs.Length == 1 && typeof(IEnumerable<>).MakeGenericType(genArgs).IsAssignableFrom(type))
                 return true;
-            return typeInfo.BaseType != null && IsIEnumerableofType(typeInfo.BaseType);
+            return type.BaseType != null && IsIEnumerableofType(type.BaseType);
         }
+
         public static IEnumerable<T> Concat<T>(this IEnumerable<T> first, params T[] second)
         {
             return !second.Any() ? first : first.Concat(second.ToList());

@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions", "Saturn72.Extensions\Saturn72.Extensions.csproj", "{B1BD613F-441F-42D2-B73D-5CF0057E7A23}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions.Data", "Saturn72.Extensions.Data\Saturn72.Extensions.Data.csproj", "{A7B3E883-359C-45EC-B925-623D55984AD9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions.Data.Tests", "Saturn72.Extensions.Data.Tests\Saturn72.Extensions.Data.Tests.csproj", "{A75E8ACD-B491-43E3-A5B6-C201B994090B}"
@@ -17,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestResources", "TestResour
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleApp", "TestResources\SimpleApp\SimpleApp.csproj", "{E280FF75-6A5D-4FA7-8780-45FE1D73DC57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions", "Saturn72.Extensions\Saturn72.Extensions.csproj", "{D543A480-1D21-4A9A-B482-97A029FEA216}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +25,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B1BD613F-441F-42D2-B73D-5CF0057E7A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1BD613F-441F-42D2-B73D-5CF0057E7A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1BD613F-441F-42D2-B73D-5CF0057E7A23}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B1BD613F-441F-42D2-B73D-5CF0057E7A23}.Debug|x64.Build.0 = Debug|Any CPU
-		{B1BD613F-441F-42D2-B73D-5CF0057E7A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1BD613F-441F-42D2-B73D-5CF0057E7A23}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1BD613F-441F-42D2-B73D-5CF0057E7A23}.Release|x64.ActiveCfg = Release|Any CPU
-		{B1BD613F-441F-42D2-B73D-5CF0057E7A23}.Release|x64.Build.0 = Release|Any CPU
 		{A7B3E883-359C-45EC-B925-623D55984AD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A7B3E883-359C-45EC-B925-623D55984AD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7B3E883-359C-45EC-B925-623D55984AD9}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -71,6 +63,14 @@ Global
 		{E280FF75-6A5D-4FA7-8780-45FE1D73DC57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E280FF75-6A5D-4FA7-8780-45FE1D73DC57}.Release|x64.ActiveCfg = Release|Any CPU
 		{E280FF75-6A5D-4FA7-8780-45FE1D73DC57}.Release|x64.Build.0 = Release|Any CPU
+		{D543A480-1D21-4A9A-B482-97A029FEA216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D543A480-1D21-4A9A-B482-97A029FEA216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D543A480-1D21-4A9A-B482-97A029FEA216}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D543A480-1D21-4A9A-B482-97A029FEA216}.Debug|x64.Build.0 = Debug|Any CPU
+		{D543A480-1D21-4A9A-B482-97A029FEA216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D543A480-1D21-4A9A-B482-97A029FEA216}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D543A480-1D21-4A9A-B482-97A029FEA216}.Release|x64.ActiveCfg = Release|Any CPU
+		{D543A480-1D21-4A9A-B482-97A029FEA216}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

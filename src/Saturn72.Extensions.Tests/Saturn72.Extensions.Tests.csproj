@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Saturn72.Extensions.Tests</RootNamespace>
     <AssemblyName>Saturn72.Extensions.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>65975cc3</NuGetPackageImportStamp>
     <SccProjectName>SAK</SccProjectName>
@@ -75,18 +75,18 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Saturn72.Extensions\Saturn72.Extensions.csproj">
-      <Project>{B1BD613F-441F-42D2-B73D-5CF0057E7A23}</Project>
-      <Name>Saturn72.Extensions</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\SimpleApp.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Saturn72.Extensions\Saturn72.Extensions.csproj">
+      <Project>{d543a480-1d21-4a9a-b482-97a029fea216}</Project>
+      <Name>Saturn72.Extensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

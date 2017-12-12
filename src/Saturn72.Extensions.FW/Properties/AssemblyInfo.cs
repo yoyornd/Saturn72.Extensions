@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Saturn72.Extensions")]
+[assembly: AssemblyTitle("Saturn72.Extensions.FW")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Saturn Technologies (saturn72.com)")]
-[assembly: AssemblyProduct("Saturn72.Extensions")]
+[assembly: AssemblyProduct("Saturn72.Extensions.FW")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

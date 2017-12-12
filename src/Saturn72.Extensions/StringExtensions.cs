@@ -11,11 +11,13 @@ namespace Saturn72.Extensions
 {
     public static class StringExtensions
     {
+        private static readonly string[] UriSchemas ={ "http", "https", "file" };
+
         public static bool IsUrl(this string source)
         {
             Uri uriResult;
             bool result = Uri.TryCreate(source, UriKind.Absolute, out uriResult)
-                          && new[] {Uri.UriSchemeHttp, Uri.UriSchemeHttps, Uri.UriSchemeFile}.Contains(uriResult.Scheme);
+                          && UriSchemas.Contains(uriResult.Scheme);
 
             return result;
         }
