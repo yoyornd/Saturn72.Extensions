@@ -1,4 +1,14 @@
-image: Visual Studio 2017
-version: 1.0.{build}
+image: 
+  - Visual Studio 2017
+
+init:
+  - git config --global core.autocrlf true 
+
+init:
+  - git config --global core.autocrlf true 
+
+before_build:
+  - git submodule update --init
+
 build:
-  verbosity: detailed
+  project: src/Saturn72.Extensions.sln
