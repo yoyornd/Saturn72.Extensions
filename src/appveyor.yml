@@ -1,0 +1,7 @@
+configuration: Release
+
+before_build:
+  - cmd: ECHO this is batch
+  - dotnet: restore
+build:
+  - dotnet: build
