@@ -1,7 +1,7 @@
+image: Visual Studio 2017
 configuration: Release
 
 before_build:
-  - cmd: ECHO this is batch
   - dotnet: restore
 build:
   - dotnet: build
