@@ -14,6 +14,20 @@ namespace Saturn72.Extensions
         private const string MustFollowDefaultMessage =
             "The object does not follows the given rule.\nSee call stack for details";
 
+        public static void Equals<T>(T source, T destination) where T: IComparable
+        {
+            Equals(source, destination, string.Format("{0} and {1} are not equal", source, destination));
+        }
+        public static void Equals<T>(T source, T destination, string message) where T : IComparable
+        {
+            MustFollow(source.Equals(destination), ()=> throw new InvalidOperationException(message));
+        }
+
+        public static void Equals<T>(T source, T destination, Action ifNotEqualAction) where T : IComparable
+        {
+            MustFollow(source.Equals(destination), ifNotEqualAction);
+        }
+
         public static void GreaterThan(IComparable greater, IComparable than)
         {
             GreaterThan(greater, than, string.Format("{0} is not greater than {1}", greater, than));
@@ -28,8 +42,7 @@ namespace Saturn72.Extensions
         {
             MustFollow(() => greater.CompareTo(than) > 0, ifNotGreaterAction);
         }
-
-
+        
         public static void GreaterOrEqualTo(IComparable greater, IComparable than)
         {
             GreaterOrEqualTo(greater, than, string.Format("{0} is not greater or equal than {1}", greater, than));

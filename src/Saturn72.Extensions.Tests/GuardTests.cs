@@ -12,6 +12,16 @@ namespace Saturn72.Extensions.Tests
     public class GuardTests
     {
         [Fact]
+        public void Guard_Equals()
+        {
+            //throws on not greater than
+            Should.Throw<InvalidOperationException>(() => Guard.Equals(10, 1));
+            Should.Throw<InvalidOperationException>(() => Guard.Equals(1, 10));
+
+            Guard.Equals(1, 1);
+        }
+
+        [Fact]
         public void Guard_GreaterThan()
         {
             //throws on not greater than

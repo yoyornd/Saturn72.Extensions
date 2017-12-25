@@ -12,4 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Saturn72.Extensions\Saturn72.Extensions.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
 </Project>
