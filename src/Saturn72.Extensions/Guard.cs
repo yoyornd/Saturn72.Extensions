@@ -28,61 +28,60 @@ namespace Saturn72.Extensions
             MustFollow(source.Equals(destination), ifNotEqualAction);
         }
 
-        public static void GreaterThan(IComparable greater, IComparable than)
+        public static void GreaterThan<T>(T greater, T than) where T : IComparable
         {
             GreaterThan(greater, than, string.Format("{0} is not greater than {1}", greater, than));
         }
 
-        public static void GreaterThan(IComparable greater, IComparable than, string message)
+        public static void GreaterThan<T>(T greater, T than, string message) where T : IComparable
         {
             GreaterThan(greater, than, () => { throw new ArgumentOutOfRangeException(message); });
         }
 
-        public static void GreaterThan(IComparable greater, IComparable than, Action ifNotGreaterAction)
+        public static void GreaterThan<T>(T greater, T than, Action ifNotGreaterAction) where T : IComparable
         {
             MustFollow(() => greater.CompareTo(than) > 0, ifNotGreaterAction);
         }
         
-        public static void GreaterOrEqualTo(IComparable greater, IComparable than)
+        public static void GreaterOrEqualTo<T>(T greater, T than) where T : IComparable
         {
             GreaterOrEqualTo(greater, than, string.Format("{0} is not greater or equal than {1}", greater, than));
         }
 
-        public static void GreaterOrEqualTo(IComparable greater, IComparable than, string message)
+        public static void GreaterOrEqualTo<T>(T greater, T than, string message) where T : IComparable
         {
             GreaterOrEqualTo(greater, than, () => { throw new ArgumentOutOfRangeException(message); });
         }
-        public static void GreaterOrEqualTo(IComparable greater, IComparable than, Action ifNotGreaterOrEqualAction)
+        public static void GreaterOrEqualTo<T>(T greater, T than, Action ifNotGreaterOrEqualAction) where T : IComparable
         {
             MustFollow(() => greater.CompareTo(than) >= 0, ifNotGreaterOrEqualAction);
         }
 
-        public static void SmallerThan(IComparable smaller, IComparable than)
+        public static void SmallerThan<T>(T smaller, T than) where T : IComparable
         {
             SmallerThan(smaller, than, string.Format("{0} is not smaller than {1}", smaller, than));
         }
 
-        public static void SmallerThan(IComparable smaller, IComparable than, string message)
+        public static void SmallerThan<T>(T smaller, T than, string message) where T : IComparable
         {
             SmallerThan(smaller, than, () => { throw new ArgumentOutOfRangeException(message); });
         }
 
-        public static void SmallerThan(IComparable smaller, IComparable than, Action ifNotSmallerThanAction)
+        public static void SmallerThan<T>(T smaller, T than, Action ifNotSmallerThanAction) where T : IComparable
         {
             MustFollow(() => smaller.CompareTo(than) < 0, ifNotSmallerThanAction);
         }
-
-
-        public static void SmallerOrEqualTo(IComparable smaller, IComparable than)
+        
+        public static void SmallerOrEqualTo<T>(T smaller, T than) where T : IComparable
         {
             SmallerOrEqualTo(smaller, than, string.Format("{0} is not smaller or equal than {1}", smaller, than));
         }
 
-        public static void SmallerOrEqualTo(IComparable smaller, IComparable than, string message)
+        public static void SmallerOrEqualTo<T>(T smaller, T than, string message) where T : IComparable
         {
             SmallerOrEqualTo(smaller, than, () => { throw new ArgumentOutOfRangeException(message); });
         }
-        public static void SmallerOrEqualTo(IComparable smaller, IComparable than, Action ifNotSmallerOrEqualAction)
+        public static void SmallerOrEqualTo<T>(T smaller, T than, Action ifNotSmallerOrEqualAction) where T : IComparable
         {
             MustFollow(() => smaller.CompareTo(than) <= 0, ifNotSmallerOrEqualAction);
         }
