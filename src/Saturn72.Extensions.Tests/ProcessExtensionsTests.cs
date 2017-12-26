@@ -28,18 +28,19 @@ namespace Saturn72.Extensions.Tests
             proc.IsRunning().ShouldBeTrue();
         }
 
-        [Fact(Skip = "need executable")]
+        [Fact]
         public void IsRunning_ReturnsFalseOnNotRunningProcess()
         {
             new Process().IsRunning().ShouldBeFalse();
-            var codeBase = Assembly.GetExecutingAssembly().CodeBase;
-            string path = Uri.UnescapeDataString(new UriBuilder(codeBase).Path);
-            var exe = Path.Combine(Path.GetDirectoryName(path), "Resources\\SimpleApp.exe");
-
-            var proc = Process.Start(exe);
-            Thread.Sleep(2000);
-            proc.CloseMainWindow();
-            Thread.Sleep(1000);
+            var psi = new ProcessStartInfo
+            {
+                WorkingDirectory = Path.GetFullPath("Resources"),
+                FileName = "dotnet",
+                Arguments = "SampleApp.dll"
+            };
+            var proc = Process.Start(psi);
+            proc.IsRunning().ShouldBeTrue();
+            proc.Close();
             proc.IsRunning().ShouldBeFalse();
         }
     }
