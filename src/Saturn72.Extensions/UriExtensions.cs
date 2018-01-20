@@ -23,10 +23,13 @@ namespace Saturn72.Extensions
         {
             if (queryParams.StartsWith("/"))
                 queryParams = queryParams.Substring(1);
-            var uriBuilder = new UriBuilder(baseUri);
-            uriBuilder.Path += queryParams;
 
-            return uriBuilder.Uri;
+            var sourceUri = baseUri.AbsoluteUri;
+            while (sourceUri.EndsWith("/"))
+                sourceUri = sourceUri.Substring(0, sourceUri.Length - 1);
+            var queriedUri = sourceUri + queryParams;
+
+            return new Uri(queriedUri);
         }
     }
 }
