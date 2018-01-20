@@ -14,6 +14,8 @@ namespace Saturn72.Extensions
             while (uriBuilder.Path.EndsWith("//"))
                 uriBuilder.Path = uriBuilder.Path.Substring(0, uriBuilder.Path.Length - 1);
 
+            uriBuilder.Path += relativePath;
+
             return uriBuilder.Uri;
         }
 
