@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
-namespace Saturn72.Extensions
+namespace System
 {
     public static class StringExtensions
     {
@@ -29,6 +30,20 @@ namespace Saturn72.Extensions
         {
             return args.Aggregate(source,
                 (current, keyValuePair) => current.Replace("{" + keyValuePair.Key + "}", keyValuePair.Value.ToString()));
+        }
+        private static readonly JsonSerializerOptions SerializerOptions = new JsonSerializerOptions
+        {
+            AllowTrailingCommas = true,
+            PropertyNameCaseInsensitive = true,
+        };
+
+        public static T ToObject<T>(this string json)
+        {
+            return JsonSerializer.Deserialize<T>(json, SerializerOptions);
+        }
+        public static object ToObject(this string json, Type toType)
+        {
+            return JsonSerializer.Deserialize(json, toType, SerializerOptions);
         }
     }
 }

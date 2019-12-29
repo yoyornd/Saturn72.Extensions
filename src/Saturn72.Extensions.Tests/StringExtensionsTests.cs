@@ -67,5 +67,27 @@ namespace Saturn72.Extensions.Tests
 
             "TTT 2 System.Object".ShouldBe("{t1} {t2} {t3}".AsFormat(formatDictionary));
         }
+
+        private const string Name = "roi";
+        private const string ValueAsString = "4";
+        private const string Json = "{\"value\":" + ValueAsString + ", \"name\":\"" + Name + "\"}";
+        private static readonly int Value = int.Parse(ValueAsString);
+        [Fact]
+        public void ToObject_FromString()
+        {
+            var o1 = Json.ToObject<TestClass>();
+            o1.Name.ShouldBe(Name);
+            o1.Value.ShouldBe(Value);
+
+            var t = Json.ToObject(typeof(TestClass));
+            var o2 = t.ShouldBeOfType<TestClass>();
+            o2.Name.ShouldBe(Name);
+            o2.Value.ShouldBe(Value);
+        }
+        public class TestClass
+        {
+            public int Value { get; set; }
+            public string Name { get; set; }
+        }
     }
 }
